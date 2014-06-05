@@ -141,7 +141,7 @@ function renderRow(item, cols) {
   var row = '';
   row += padRight(moment(item.LastModified).format('MMM D, YYYY h:mma'), cols[1]) + '  ';
   row += padRight(bytesToSize(item.Size), cols[2]);
-  row += '<a href="' + BUCKET_URL + item.href + '">' + item.keyText + '</a>';
+  row += '<a href="' + BUCKET_URL + item.href.replace("/", "") + '">' + item.keyText + '</a>';
   return row;
 }
 
