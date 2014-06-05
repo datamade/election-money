@@ -5,7 +5,7 @@ if (typeof S3BL_IGNORE_PATH == 'undefined' || S3BL_IGNORE_PATH!=true) {
 jQuery(function($) {
   var s3_rest_url = createS3QueryUrl();
   // set loading notice
-  $('#listing').html('<h3>Loading <img src="//assets.okfn.org/images/icons/ajaxload-circle.gif" /></h3>');
+  $('#listing').spin('large');
   $.get(s3_rest_url)
     .done(function(data) {
       // clear loading notice
@@ -13,6 +13,7 @@ jQuery(function($) {
       var xml = $(data);
       var info = getInfoFromS3Data(xml);
       renderTable(info);
+      $('#listing').spin(false);
     })
     .fail(function(error) {
       alert('There was an error');
@@ -98,7 +99,7 @@ function renderTable(info) {
     ;
   var cols = [ 45, 30, 15 ];
   var content = [];
-  content.push(padRight('Last Modified', cols[1]) + '  ' + padRight('Size', cols[2]) + 'Key \n');
+  content.push(padRight('Last Modified', cols[1]) + '  ' + padRight('Size', cols[2]) + 'File \n');
   content.push(new Array(cols[0] + cols[1] + cols[2] + 4).join('-') + '\n');
   
   // add the ../ at the start of the directory listing
@@ -138,9 +139,9 @@ function renderTable(info) {
 
 function renderRow(item, cols) {
   var row = '';
-  row += padRight(item.LastModified, cols[1]) + '  ';
+  row += padRight(moment(item.LastModified).format('MMM D, YYYY h:mma'), cols[1]) + '  ';
   row += padRight(item.Size, cols[2]);
-  row += '<a href="' + item.href + '">' + item.keyText + '</a>';
+  row += '<a href="' + BUCKET_URL + item.href + '">' + item.keyText + '</a>';
   return row;
 }
 
