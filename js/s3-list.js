@@ -5,15 +5,27 @@ if (typeof S3BL_IGNORE_PATH == 'undefined' || S3BL_IGNORE_PATH!=true) {
 function renderBucket(el, bucket_url) {
   var s3_rest_url = createS3QueryUrl(bucket_url);
   // set loading notice
-  $(el).spin('large');
+  $("#" + el).spin({top: '20px'});
   $.get(s3_rest_url)
     .done(function(data) {
-      // clear loading notice
-      $(el).html('');
       var xml = $(data);
       var info = getInfoFromS3Data(xml);
-      $(el).html(renderTable(info));
-      $(el).spin(false);
+      $("#" + el + " tbody").append(renderTable(info, bucket_url));
+
+      // initialize datatables
+      $("#" + el).dataTable( {
+          "aaSorting": [ [0,'desc'] ],
+          "aoColumns": [
+              null,
+              null,
+              null
+          ],
+          "bInfo": false,
+          "bFilter": false,
+          "bPaginate": false
+      });
+
+      $("#" + el).spin(false);
     })
     .fail(function(error) {
       alert('There was an error');
@@ -82,73 +94,22 @@ function getInfoFromS3Data(xml) {
   }
 }
 
-// info is object like:
-// {
-//    files: ..
-//    directories: ..
-//    prefix: ...
-// } 
 function renderTable(info, bucket_url) {
-  var files = info.files.concat(info.directories)
-    , prefix = info.prefix
-    ;
-  var cols = [ 45, 30, 15 ];
-  var content = [];
-  content.push(padRight('Last Modified', cols[1]) + '  ' + padRight('Size', cols[2]) + 'File \n');
-  content.push(new Array(cols[0] + cols[1] + cols[2] + 4).join('-') + '\n');
-  
-  // add the ../ at the start of the directory listing
-  if (prefix) {
-    var up = prefix.replace(/\/$/, '').split('/').slice(0, -1).concat('').join('/'), // one directory up
-        item = { 
-          Key: up,
-          LastModified: '',
-          Size: '',
-          keyText: '../',
-          href: S3BL_IGNORE_PATH ? '?prefix=' + up : '../'
-        },
-        row = renderRow(item, cols, bucket_url);
-    content.push(row + '\n');
-  }
-  
+
+  var result = "";
+  var files = info.files.concat(info.directories);
+
   jQuery.each(files, function(idx, item) {
-    // strip off the prefix
-    item.keyText = item.Key.substring(prefix.length);
-    if (item.Type === 'directory') {
-      if (S3BL_IGNORE_PATH) {
-        item.href = location.protocol + '//' + location.hostname + location.pathname + '?prefix=' + item.Key;
-      } else {
-        item.href = item.keyText;
-      }
-    } else {
-      // TODO: need to fix this up for cases where we are on site not bucket
-      // in that case href for a file should point to s3 bucket
-      item.href = '/' + item.Key;
-    }
-    var row = renderRow(item, cols, bucket_url);
-    content.push(row + '\n');
+    result += "\
+      <tr>\
+        <td>" + '<a href="' + bucket_url + item.Key + '">' + item.Key + '</a>' + "</td>\
+        <td>" + bytesToSize(item.Size) + "</td>\
+        <td>" + moment(item.LastModified).format('MMM D, YYYY h:mma') + "</td>\
+      </tr>\
+    ";
   });
 
-  return content.join('');
-}
-
-function renderRow(item, cols, bucket_url) {
-  var row = '';
-  row += padRight(moment(item.LastModified).format('MMM D, YYYY h:mma'), cols[1]) + '  ';
-  row += padRight(bytesToSize(item.Size), cols[2]);
-  row += '<a href="' + bucket_url + item.href.replace("/", "") + '">' + item.keyText + '</a>';
-  return row;
-}
-
-function padRight(padString, length) {
-  var str = padString.slice(0, length-3);
-  if (padString.length > str.length) {
-    str += '...';
-  }
-  while (str.length < length) {
-    str = str + ' ';
-  }
-  return str;
+  return result;
 }
 
 function bytesToSize(bytes) {
