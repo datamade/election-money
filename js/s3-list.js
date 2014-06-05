@@ -100,11 +100,16 @@ function renderTable(info, bucket_url) {
   var files = info.files.concat(info.directories);
 
   jQuery.each(files, function(idx, item) {
+
+    var last_mod = "";
+    if (item.LastModified)
+      last_mod = moment(item.LastModified).format('MMM D, YYYY h:mma');
+
     result += "\
       <tr>\
         <td>" + '<a href="' + bucket_url + item.Key + '">' + item.Key + '</a>' + "</td>\
         <td>" + bytesToSize(item.Size) + "</td>\
-        <td>" + moment(item.LastModified).format('MMM D, YYYY h:mma') + "</td>\
+        <td>" + last_mod + "</td>\
       </tr>\
     ";
   });
