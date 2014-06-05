@@ -11,7 +11,8 @@ function renderBucket(el, bucket_url) {
       var xml = $(data);
       var info = getInfoFromS3Data(xml);
       $("#" + el + " tbody").append(renderTable(info, bucket_url));
-
+      $("#" + el).spin(false);
+      
       // initialize datatables
       $("#" + el).dataTable( {
           "aaSorting": [ [0,'desc'] ],
@@ -24,8 +25,6 @@ function renderBucket(el, bucket_url) {
           "bFilter": false,
           "bPaginate": false
       });
-
-      $("#" + el).spin(false);
     })
     .fail(function(error) {
       alert('There was an error');
@@ -107,7 +106,7 @@ function renderTable(info, bucket_url) {
 
     result += "\
       <tr>\
-        <td>" + '<a href="' + bucket_url + item.Key + '">' + item.Key + '</a>' + "</td>\
+        <td>" + '<a href="' + bucket_url + item.Key + '"> <i class="fa fa-download"></i> ' + item.Key + '</a>' + "</td>\
         <td>" + bytesToSize(item.Size) + "</td>\
         <td>" + last_mod + "</td>\
       </tr>\
