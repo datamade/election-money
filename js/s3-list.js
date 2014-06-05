@@ -2,33 +2,28 @@ if (typeof S3BL_IGNORE_PATH == 'undefined' || S3BL_IGNORE_PATH!=true) {
   var S3BL_IGNORE_PATH = false;
 }
 
-jQuery(function($) {
-  var s3_rest_url = createS3QueryUrl();
+function renderBucket(el, bucket_url) {
+  var s3_rest_url = createS3QueryUrl(bucket_url);
   // set loading notice
-  $('#listing').spin('large');
+  $(el).spin('large');
   $.get(s3_rest_url)
     .done(function(data) {
       // clear loading notice
-      $('#listing').html('');
+      $(el).html('');
       var xml = $(data);
       var info = getInfoFromS3Data(xml);
-      renderTable(info);
-      $('#listing').spin(false);
+      $(el).html(renderTable(info));
+      $(el).spin(false);
     })
     .fail(function(error) {
       alert('There was an error');
       console.log(error);
     });
-});
+}
 
-function createS3QueryUrl() {
-  if (typeof BUCKET_URL != 'undefined') {
-    var s3_rest_url = BUCKET_URL;
-  } else {
-    var s3_rest_url = location.protocol + '//' + location.hostname;
-  }
+function createS3QueryUrl(bucket_url) {
 
-  s3_rest_url += '?delimiter=/';
+  bucket_url += '?delimiter=/';
 
   // handle pathes / prefixes - 2 options
   //
@@ -56,9 +51,9 @@ function createS3QueryUrl() {
   if (prefix) {
     // make sure we end in /
     var prefix = prefix.replace(/\/$/, '') + '/';
-    s3_rest_url += '&prefix=' + prefix;
+    bucket_url += '&prefix=' + prefix;
   }
-  return s3_rest_url;
+  return bucket_url;
 }
 
 function getInfoFromS3Data(xml) {
@@ -93,7 +88,7 @@ function getInfoFromS3Data(xml) {
 //    directories: ..
 //    prefix: ...
 // } 
-function renderTable(info) {
+function renderTable(info, bucket_url) {
   var files = info.files.concat(info.directories)
     , prefix = info.prefix
     ;
@@ -112,7 +107,7 @@ function renderTable(info) {
           keyText: '../',
           href: S3BL_IGNORE_PATH ? '?prefix=' + up : '../'
         },
-        row = renderRow(item, cols);
+        row = renderRow(item, cols, bucket_url);
     content.push(row + '\n');
   }
   
@@ -130,18 +125,18 @@ function renderTable(info) {
       // in that case href for a file should point to s3 bucket
       item.href = '/' + item.Key;
     }
-    var row = renderRow(item, cols);
+    var row = renderRow(item, cols, bucket_url);
     content.push(row + '\n');
   });
 
-  document.getElementById('listing').innerHTML = '<pre>' + content.join('') + '</pre>';
+  return content.join('');
 }
 
-function renderRow(item, cols) {
+function renderRow(item, cols, bucket_url) {
   var row = '';
   row += padRight(moment(item.LastModified).format('MMM D, YYYY h:mma'), cols[1]) + '  ';
   row += padRight(bytesToSize(item.Size), cols[2]);
-  row += '<a href="' + BUCKET_URL + item.href.replace("/", "") + '">' + item.keyText + '</a>';
+  row += '<a href="' + bucket_url + item.href.replace("/", "") + '">' + item.keyText + '</a>';
   return row;
 }
 
