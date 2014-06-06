@@ -14,8 +14,8 @@
           <td>
             <a href='https://s3.amazonaws.com/{{key.bucket.name}}/{{key.name.encode('utf-8')}}'> <i class="fa fa-download"></i> {{key.name.encode('utf-8')}}</a>
           </td>
-          <td>{{ key.size | format_file }}</td>
-          <td>{{ key.last_modified | format_datetime }}</td>
+          <td><span data-value="{{key.size}}">{{ key.size | format_file }}</span></td>
+          <td><span data-value="{{key.last_modified}}">{{ key.last_modified | format_datetime }}</span></td>
         </tr>
       {% endif %}
     {% endfor %}

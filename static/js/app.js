@@ -3,8 +3,8 @@ function makeDataTable(el) {
       "aaSorting": [ [0,'desc'] ],
       "aoColumns": [
           null,
-          null,
-          null
+          { "sType": "data-value-num" },
+          { "sType": "data-value-string" }
       ],
       "bInfo": false,
       "bFilter": false,
