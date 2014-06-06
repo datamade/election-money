@@ -10,21 +10,22 @@ function renderBucket(el, bucket_url) {
     .done(function(data) {
       var xml = $(data);
       var info = getInfoFromS3Data(xml);
-      $("#" + el + " tbody").append(renderTable(info, bucket_url));
+      var table = renderTable(info, bucket_url);
+      $("#" + el + " tbody").html(table);
       $("#" + el).spin(false);
-      
+
       // initialize datatables
-      $("#" + el).dataTable( {
-          "aaSorting": [ [0,'desc'] ],
-          "aoColumns": [
-              null,
-              null,
-              null
-          ],
-          "bInfo": false,
-          "bFilter": false,
-          "bPaginate": false
-      });
+      // $("#" + el).dataTable( {
+      //     "aaSorting": [ [0,'desc'] ],
+      //     "aoColumns": [
+      //         null,
+      //         null,
+      //         null
+      //     ],
+      //     "bInfo": false,
+      //     "bFilter": false,
+      //     "bPaginate": false
+      // });
     })
     .fail(function(error) {
       alert('There was an error');
@@ -96,7 +97,7 @@ function getInfoFromS3Data(xml) {
 function renderTable(info, bucket_url) {
 
   var result = "";
-  var files = info.files.concat(info.directories);
+  var files = info.files;
 
   jQuery.each(files, function(idx, item) {
 
