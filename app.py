@@ -8,6 +8,8 @@ import operator
 import boto
 
 app = Flask(__name__)
+app.config['DEBUG'] = True
+app.config['PROPAGATE_EXCEPTIONS'] = True
 
 # ROUTES
 @app.route('/')
@@ -17,8 +19,6 @@ def index():
     conn = boto.connect_s3()
     bucket = conn.get_bucket('il-elections')
     file_list = [key for key in bucket.list()]
-    for key in file_list:
-        print key.name.encode('utf-8')
 
   except ValueError:
       print "Error opening S3 bucket"
