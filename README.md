@@ -2,6 +2,8 @@
 
 Illinois State Board of Elections - Bulk Downloads
 
+Powered by [influence-usa/campaign-finance_state_IL](https://github.com/influence-usa/campaign-finance_state_IL)
+
 ## Running locally
 
 ``` bash
