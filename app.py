@@ -1,4 +1,5 @@
 from flask import Flask, request, make_response, render_template
+from flask.ext.cache import Cache
 from datetime import date, datetime, timedelta
 from operator import itemgetter
 import json
@@ -8,11 +9,15 @@ import operator
 import boto
 
 app = Flask(__name__)
+cache = Cache(config={'CACHE_TYPE': 'simple'})
+cache.init_app(app)
+
 app.config['DEBUG'] = True
 app.config['PROPAGATE_EXCEPTIONS'] = True
 
 # ROUTES
 @app.route('/')
+@cache.cached(timeout=60*10) # cache for 10 min
 def index():
 
   try:

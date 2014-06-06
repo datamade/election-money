@@ -1,3 +1,4 @@
 Flask==0.10.1
+Flask-Cache
 gunicorn==18.0
 boto
