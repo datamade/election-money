@@ -17,7 +17,7 @@ app.config['PROPAGATE_EXCEPTIONS'] = True
 
 # ROUTES
 @app.route('/')
-@cache.cached(timeout=60*10) # cache for 10 min
+# @cache.cached(timeout=60*10) # cache for 10 min
 def index():
 
   try:

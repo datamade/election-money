@@ -52,6 +52,7 @@
         </thead>
         <tbody>
           {% for key in receipts_list %}
+            {% if key.size > 0 %}
               <tr>
                 <td>
                   <a href='https://s3.amazonaws.com/{{key.bucket.name}}/{{key.name.encode('utf-8')}}'> <i class="fa fa-download"></i> {{key.name.encode('utf-8')}}</a>
@@ -59,6 +60,7 @@
                 <td>{{format_file(key.size)}}</td>
                 <td>{{format_datetime(key.last_modified)}}</td>
               </tr>
+            {% endif %}
           {% endfor %}
         <tbody>
       </table>
@@ -74,6 +76,7 @@
         </thead>
         <tbody>
           {% for key in expenditures_list %}
+            {% if key.size > 0 %}
               <tr>
                 <td>
                   <a href='https://s3.amazonaws.com/{{key.bucket.name}}/{{key.name.encode('utf-8')}}'> <i class="fa fa-download"></i> {{key.name.encode('utf-8')}}</a>
@@ -81,6 +84,7 @@
                 <td>{{format_file(key.size)}}</td>
                 <td>{{format_datetime(key.last_modified)}}</td>
               </tr>
+            {% endif %}
           {% endfor %}
         <tbody>
       </table>
