@@ -35,17 +35,21 @@ def index():
   return render_app_template('index.html', receipts_list=receipts_list, expenditures_list=expenditures_list)
 
 # UTILITY
-@app.context_processor
-def utility_processor():
-    def format_file(num):
-      for x in ['bytes','KB','MB','GB','TB']:
-          if num < 1024.0:
-              return "%3.1f %s" % (num, x)
-          num /= 1024.0
-    def format_datetime(str):
-      return datetime.strptime(str, "%Y-%m-%dT%H:%M:%S.000Z").strftime("%b %e, %Y %I:%M %p")
+@app.template_filter('format_file')
+def format_file(num):
+  for x in ['bytes','KB','MB','GB','TB']:
+      if num < 1024.0:
+          return "%3.1f %s" % (num, x)
+      num /= 1024.0
 
-    return dict(format_file=format_file, format_datetime=format_datetime)
+app.jinja_env.filters['format_file'] = format_file
+
+@app.template_filter('format_datetime')
+def format_datetime(str):
+  return datetime.strptime(str, "%Y-%m-%dT%H:%M:%S.000Z").strftime("%b %e, %Y %I:%M %p")
+
+app.jinja_env.filters['format_datetime'] = format_datetime
+
 
 def render_app_template(template, **kwargs):
     '''Add some goodies to all templates.'''
