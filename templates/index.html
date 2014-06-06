@@ -42,7 +42,7 @@
       </div>
 
       <h3>Individual Campaign Contributions</h3>
-      <table class='table table-bordered' id="receipts_listing">
+      <table class='table table-bordered' id="receipts_list">
         <thead>
           <tr>
             <th>File</th>
@@ -51,7 +51,7 @@
           </tr>
         </thead>
         <tbody>
-          {% for key in list %}
+          {% for key in receipts_list %}
               <tr>
                 <td>
                   <a href='https://s3.amazonaws.com/{{key.bucket.name}}/{{key.name.encode('utf-8')}}'> <i class="fa fa-download"></i> {{key.name.encode('utf-8')}}</a>
@@ -63,8 +63,8 @@
         <tbody>
       </table>
 
-      <!-- <h3>Campaign Expenditures</h3>
-      <table class='table table-bordered' id="expenditures_listing">
+      <h3>Campaign Expenditures</h3>
+      <table class='table table-bordered' id="expenditures_list">
         <thead>
           <tr>
             <th>File</th>
@@ -72,8 +72,18 @@
             <th>Last modified</th>
           </tr>
         </thead>
-        <tbody><tbody>
-      </table> -->
+        <tbody>
+          {% for key in expenditures_list %}
+              <tr>
+                <td>
+                  <a href='https://s3.amazonaws.com/{{key.bucket.name}}/{{key.name.encode('utf-8')}}'> <i class="fa fa-download"></i> {{key.name.encode('utf-8')}}</a>
+                </td>
+                <td>{{format_file(key.size)}}</td>
+                <td>{{format_datetime(key.last_modified)}}</td>
+              </tr>
+          {% endfor %}
+        <tbody>
+      </table>
 
       <p class='pull-left'>Source: <a href='http://www.elections.state.il.us/CampaignDisclosure/ContributionsSearchByAllContributions.aspx'>Illinois State Board of Elections</a></p>
 
@@ -86,7 +96,8 @@
     <script src="/static/js/app.js"></script>
 
     <script type="text/javascript">
-      makeDataTable('receipts_listing');
+      makeDataTable('receipts_list');
+      makeDataTable('expenditures_list');
     </script>
         
     </body>

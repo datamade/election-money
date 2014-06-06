@@ -17,18 +17,22 @@ app.config['PROPAGATE_EXCEPTIONS'] = True
 
 # ROUTES
 @app.route('/')
-@cache.cached(timeout=60*10) # cache for 10 min
+# @cache.cached(timeout=60*10) # cache for 10 min
 def index():
 
   try:
     conn = boto.connect_s3()
     bucket = conn.get_bucket('il-elections')
+
+    # for geting folder listings: http://docs.pythonboto.org/en/latest/ref/s3.html?highlight=s3connection#boto.s3.bucket.Bucket.list
+    receipts_list = [key for key in bucket.list("Receipts/", "/")]
+    expenditures_list = [key for key in bucket.list("Expenditures/", "/")]
     file_list = [key for key in bucket.list()]
 
   except ValueError:
       print "Error opening S3 bucket"
 
-  return render_app_template('index.html', list=file_list)
+  return render_app_template('index.html', receipts_list=receipts_list, expenditures_list=expenditures_list)
 
 # UTILITY
 @app.context_processor
