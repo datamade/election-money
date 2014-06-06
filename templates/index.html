@@ -26,32 +26,42 @@
 
   <body>
 
-    <div class="navbar navbar-default" role="navigation">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="/">Illinois State Board of Elections - Bulk Downloads</a>
+    <div class='container'>
+      <div class='row'>
+        <div class='col-md-10 col-md-offset-1'>
+
+          <div class='jumbotron'>
+            <h1>
+              <i class='fa fa-dollar'></i>
+              <i class='fa fa-university'></i>
+              <i class='fa fa-download'></i>
+              <i class='fa fa-child'></i>
+            </h1>
+            <h2>Illinois State Board of Elections<br />Bulk Downloads</h2>
+            
+            <p>Interested in money in Illinois politics? Below are bulk downloads of Illinois campaign contributions and expenditures from the <a href='http://www.elections.il.gov'>Illinois State Board of Elections</a> going back to 1989.</p>
+            
+          </div>
+
+          <h3>Individual Campaign Contributions</h3>
+          <p>Itemized contributions by people and organizations to political action committees in Illinois from 1989 to present. <br />Updated daily.</p>
+          {{ file_table('receipts_list', receipts_list) }}
+
+          <h3>Campaign Expenditures</h3>
+          <p>Itemized expenses by political action committees. <br />Updated quarterly.</p>
+          {{ file_table('expenditures_list', expenditures_list) }}
+
+          <hr />
+
+          <p>Interested in learning more about campaign finance disclosure in Illinois? Read the Illinois State Board of Elections <a href='http://www.elections.il.gov/downloads/campaigndisclosure/pdf/campdiscguide.pdf'>Guide to Campaign Disclosure</a> (PDF).</p>
+          <hr />
+
+          <p class='pull-left'>Source: <a href='http://www.elections.state.il.us/CampaignDisclosure/ContributionsSearchByAllContributions.aspx'>Illinois State Board of Elections</a></p>
+
+          <p class='pull-right'>Built by <a href='http://datamade.us'>DataMade</a></p>
+
         </div>
-    </div>
-
-    <div class='col-md-8'>
-
-      <div class='well'>
-        <p>Interested in money in politics? Below are bulk downloads of Illinois campaign contributions from the <a href='http://www.elections.il.gov'>Illinois State Board of Elections</a> going back to 1989. Updated daily.</p>
-        <ul>
-            <li><a href='#receipts_list'>Individual Campaign Contributions</a></li>
-            <li><a href='#expenditures_list'>Campaign Expenditures</a></li>
-        </ul>
       </div>
-
-      <h3>Individual Campaign Contributions</h3>
-      {{ file_table('receipts_list', receipts_list) }}
-
-      <h3>Campaign Expenditures</h3>
-      {{ file_table('expenditures_list', expenditures_list) }}
-
-      <p class='pull-left'>Source: <a href='http://www.elections.state.il.us/CampaignDisclosure/ContributionsSearchByAllContributions.aspx'>Illinois State Board of Elections</a></p>
-
-      <p class='pull-right'>Built by <a href='http://datamade.us'>DataMade</a></p>
-
     </div>
 
     <script src="/static/js/jquery.min.js"></script>
