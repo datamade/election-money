@@ -43,23 +43,450 @@
             
           </div>
 
-          <h3>Individual Campaign Contributions</h3>
+          <h3><i class='fa fa-users'></i> Political action committees</h3>
+          <p>Political action commitees registered in Illinois. Updated weekly.</p>
+          <div class="panel-group" id="committees_accordion">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#committees_accordion" href="#committees_collapse">
+                    <i class='fa fa-question-circle'></i>
+                    Field definitions - Political action committees
+                  </a>
+                </h4>
+              </div>
+              <div id="committees_collapse" class="panel-collapse collapse">
+                <div class="panel-body">
+                  <table class='table'>
+                    <thead>
+                      <tr>
+                        <th>Field</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>id</td>
+                        <td>Committee ID given by the Illinois State Board of Elections</td>
+                      </tr>
+                      <tr>
+                        <td>name</td>
+                        <td>Committee name</td>
+                      </tr>
+                      <tr>
+                        <td>type</td>
+                        <td>Ballot Initiative, Candidate, Political Action, Political Party, or blank</td>
+                      </tr>
+                      <tr>
+                        <td>url</td>
+                        <td>Link to this committee on the Illinois State Board of Elections</td>
+                      </tr>
+                      <tr>
+                        <td>address</td>
+                        <td>Mailing address of the committee</td>
+                      </tr>
+                      <tr>
+                        <td>status</td>
+                        <td>Active or Final</td>
+                      </tr>
+                      <tr>
+                        <td>purpose</td>
+                        <td>Stated purpose of the committee</td>
+                      </tr>
+                      <tr>
+                        <td>state_id</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>local_id</td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {{ file_table('committees_list', committees_list) }}
+
+          <h3><i class='fa fa-user'></i> Committee officers</h3>
+          <p>Officers (typically the Chairman and Treasurer) for each committee. Updated weekly.</p>
+
+          <div class="panel-group" id="officers_accordion">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#officers_accordion" href="#officers_collapse">
+                    <i class='fa fa-question-circle'></i>
+                    Field definitions - Committee officers
+                  </a>
+                </h4>
+              </div>
+              <div id="officers_collapse" class="panel-collapse collapse">
+                <div class="panel-body">
+                  <table class='table'>
+                    <thead>
+                      <tr>
+                        <th>Field</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>id</td>
+                        <td>Officer ID given by the Illinois State Board of Elections</td>
+                      </tr>
+                      <tr>
+                        <td>committee_id</td>
+                        <td>ID of the committee they are an officer of</td>
+                      </tr>
+                      <tr>
+                        <td>name</td>
+                        <td>Officer name</td>
+                      </tr>
+                      <tr>
+                        <td>title</td>
+                        <td>Officer title. Typically Treasurer or Chairman</td>
+                      </tr>
+                      <tr>
+                        <td>address</td>
+                        <td>Mailing address of the officer</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {{ file_table('officers_list', officers_list) }}
+
+          <h3>
+            <i class='fa fa-dollar'></i>
+            <i class='fa fa-long-arrow-right'></i>
+            <i class='fa fa-users'></i> 
+            Individual campaign contributions
+          </h3>
           <p>Itemized contributions by people and organizations to political action committees in Illinois from 1989 to present. <br />Updated daily.</p>
+
+          <div class="panel-group" id="receipts_accordion">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#receipts_accordion" href="#receipts_collapse">
+                    <i class='fa fa-question-circle'></i>
+                    Field definitions - Individual campaign contributions
+                  </a>
+                </h4>
+              </div>
+              <div id="receipts_collapse" class="panel-collapse collapse">
+                <div class="panel-body">
+                  <table class='table'>
+                    <thead>
+                      <tr>
+                        <th>Field</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>CommitteeID</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>LastOnlyName</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>FirstName</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>RcvDate</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>Amount</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>LoanAmount</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>Occupation</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>Employer</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>Address1</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>Address2</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>City</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>State</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>Zip</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>RctType</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>Description</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>VendorLastOnlyName</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>VendorFirstName</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>VendorAddress1</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>VendorAddress2</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>VendorCity</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>VendorState</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>VendorZip</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>RptType</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>ElectionType</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>ElectionYear</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>RptPdBegDate</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>RptPdEndDate</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>RptRcvdDate</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>CmteReferName</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>CmteName</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>StateCmte</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>StateID</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>LocalCmte</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>LocalID</td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {{ file_table('receipts_list', receipts_list) }}
 
-          <h3>Campaign Expenditures</h3>
+          <h3>
+            <i class='fa fa-users'></i> 
+            <i class='fa fa-long-arrow-right'></i> 
+            <i class='fa fa-dollar'></i>
+            Campaign expenditures
+          </h3>
           <p>Itemized expenses by political action committees. <br />Updated quarterly.</p>
+
+          <div class="panel-group" id="expenditures_accordion">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#expenditures_accordion" href="#expenditures_collapse">
+                    <i class='fa fa-question-circle'></i>
+                    Field definitions - Campaign expenditures
+                  </a>
+                </h4>
+              </div>
+              <div id="expenditures_collapse" class="panel-collapse collapse">
+                <div class="panel-body">
+                  <table class='table'>
+                    <thead>
+                      <tr>
+                        <th>Field</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>CommitteeID</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>LastOnlyName</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>FirstName</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>ExpendedDate</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>Amount</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>Address1</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>Address2</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>City</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>State</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>Zip</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>ExpType</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>Purpose</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>Beneficiary</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>CandidateName</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>Office</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>Supporting</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>Opposing</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>RptType</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>ElectionType</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>ElectionYear</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>RptPdBegDate</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>RptPdEndDate</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>CmteReferName</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>CmteName</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>StateCmte</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>StateID</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>LocalCmte</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>LocalID</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>RptRcvdDate</td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {{ file_table('expenditures_list', expenditures_list) }}
-
-          
-
-          <h3>Coming soon ...</h3>
-          <ul>
-            <li>Political action committees (active and inactive)</li>
-            <li>Political action committee officers</li>
-          </ul>
-
-          <hr />
 
           <p>Interested in learning more about campaign finance disclosure in Illinois? Read the Illinois State Board of Elections <a href='http://www.elections.il.gov/downloads/campaigndisclosure/pdf/campdiscguide.pdf'>Guide to Campaign Disclosure</a> (PDF).</p>
           <hr />

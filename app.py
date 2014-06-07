@@ -27,12 +27,18 @@ def index():
     # for geting folder listings: http://docs.pythonboto.org/en/latest/ref/s3.html?highlight=s3connection#boto.s3.bucket.Bucket.list
     receipts_list = [key for key in bucket.list("Receipts/", "/")]
     expenditures_list = [key for key in bucket.list("Expenditures/", "/")]
+    committees_list = [key for key in bucket.list("Committees")]
+    officers_list = [key for key in bucket.list("Officers")]
     file_list = [key for key in bucket.list()]
 
   except ValueError:
       print "Error opening S3 bucket"
 
-  return render_app_template('index.html', receipts_list=receipts_list, expenditures_list=expenditures_list)
+  return render_app_template('index.html', 
+    receipts_list=receipts_list, 
+    expenditures_list=expenditures_list,
+    committees_list=committees_list,
+    officers_list=officers_list)
 
 # UTILITY
 @app.template_filter('format_file')
