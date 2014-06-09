@@ -92,7 +92,7 @@
                       </tr>
                       <tr>
                         <td>type</td>
-                        <td>Ballot Initiative, Candidate, Political Action, Political Party, or blank</td>
+                        <td>Ballot Initiative, Candidate, Political Action or Political Party</td>
                       </tr>
                       <tr>
                         <td>url</td>
@@ -120,7 +120,7 @@
                       </tr>
                       <tr>
                         <td>creation_date</td>
-                        <td>Date the committee was founded</td>
+                        <td>The date on which a political committee's filing obligations begin. A political committee must begin filing disclosure reports when it either receives or expends in excess of $3000 within any twelve month period on behalf of or in opposition to a candidate or proposition.</td>
                       </tr>
                     </tbody>
                   </table>
@@ -132,7 +132,7 @@
           {{ file_table('committees_list', committees_list) }}
 
           <h3 id='officers'><i class='fa fa-user'></i> Committee officers</h3>
-          <p>Officers (typically the Chairman and Treasurer) for each committee. Updated weekly.</p>
+          <p>Officers for each committee. Each political committee must have both a chairman and a treasurer. One person may hold both positions. A candidate may serve as his own chairman and treasurer. No financial transactions may take place while there is a vacancy in either office. Updated weekly.</p>
 
           <div class="panel-group" id="officers_accordion">
             <div class="panel panel-default">
@@ -189,7 +189,7 @@
             <i class='fa fa-users'></i> 
             Campaign contributions
           </h3>
-          <p>Itemized contributions by people and organizations to political  committees in Illinois from 1989 to present. <br />Updated daily.</p>
+          <p>Itemized contributions to political committees in Illinois from 1989 to present. Includes any gift, subscription, donation, dues, loans, advance, deposit of money, anything of value, purchase of fund-raising tickets, or transfer of funds knowingly received to support or oppose a candidate or proposition.<br />Updated daily.</p>
 
           <div class="panel-group" id="receipts_accordion">
             <div class="panel panel-default">
@@ -213,7 +213,7 @@
                     <tbody>
                       <tr>
                         <td>CommitteeID</td>
-                        <td></td>
+                        <td>ID of the committee the contribution was given to</td>
                       </tr>
                       <tr>
                         <td>LastOnlyName</td>
@@ -225,11 +225,11 @@
                       </tr>
                       <tr>
                         <td>RcvDate</td>
-                        <td></td>
+                        <td>A contribution is deemed received on the date (i) a monetary contribution was deposited in a bank, financial institution, or other repository of funds for the committee, (ii) the date a committee receives notice a monetary contribution was deposited by an entity used to process financial transactions by credit card or other entity used for processing a monetary contribution that was deposited in a bank, financial institution, or other repository of funds for the committee, or (iii) for inkind contributions, possession of which is not actually obtained by the recipient committee, the public official, candidate, or political committee receives the notification of contribution of goods or services.</td>
                       </tr>
                       <tr>
                         <td>Amount</td>
-                        <td></td>
+                        <td>Contribution amount</td>
                       </tr>
                       <tr>
                         <td>LoanAmount</td>
@@ -265,7 +265,7 @@
                       </tr>
                       <tr>
                         <td>RctType</td>
-                        <td></td>
+                        <td>Type of contribution. Individual Contribution, In-kind Contribution, Transfer In, Loan Received or Other Receipt</td>
                       </tr>
                       <tr>
                         <td>Description</td>
@@ -301,7 +301,7 @@
                       </tr>
                       <tr>
                         <td>RptType</td>
-                        <td></td>
+                        <td>Report type. A-1, Final or Quarterly</td>
                       </tr>
                       <tr>
                         <td>ElectionType</td>
@@ -313,15 +313,15 @@
                       </tr>
                       <tr>
                         <td>RptPdBegDate</td>
-                        <td></td>
+                        <td>Report period begin date</td>
                       </tr>
                       <tr>
                         <td>RptPdEndDate</td>
-                        <td></td>
+                        <td>Report period end date</td>
                       </tr>
                       <tr>
                         <td>RptRcvdDate</td>
-                        <td></td>
+                        <td>Date report was received</td>
                       </tr>
                       <tr>
                         <td>CmteReferName</td>
@@ -329,7 +329,7 @@
                       </tr>
                       <tr>
                         <td>CmteName</td>
-                        <td></td>
+                        <td>Name of the committee the contribution was given to</td>
                       </tr>
                       <tr>
                         <td>StateCmte</td>
@@ -341,7 +341,7 @@
                       </tr>
                       <tr>
                         <td>LocalCmte</td>
-                        <td></td>
+                        <td>True or False</td>
                       </tr>
                       <tr>
                         <td>LocalID</td>
@@ -362,7 +362,7 @@
             <i class='fa fa-dollar'></i>
             Campaign expenditures
           </h3>
-          <p>Itemized expenses by political committees. <br />Updated quarterly.</p>
+          <p>Itemized expenditures by political committees. Any payment, distribution, purchase, loan, advance, deposit, gift of money or anything of value, or any transfer of funds between political committees, made to support or oppose a candidate or proposition. The definition also includes an electioneering communication.<br />Updated quarterly.</p>
 
           <div class="panel-group" id="expenditures_accordion">
             <div class="panel panel-default">
@@ -509,7 +509,15 @@
 
           {{ file_table('expenditures_list', expenditures_list) }}
 
-          <p>Interested in learning more about campaign finance disclosure in Illinois? Read the Illinois State Board of Elections <a href='http://www.elections.il.gov/downloads/campaigndisclosure/pdf/campdiscguide.pdf'>Guide to Campaign Disclosure</a> (PDF).</p>
+          <h3>Understanding the data</h3>
+          <p>Interested in learning more about campaign finance disclosure in Illinois? Here are a few useful resources:</p>
+
+          <ul>
+            <li><a href='http://www.elections.il.gov/downloads/campaigndisclosure/pdf/campdiscguide.pdf'>Official Guide to Campaign Disclosure</a> (PDF)</li>
+            <li><a href='http://www.elections.il.gov/Downloads/CampaignDisclosure/PDF/Contribution%20Limits.pdf'>Illinois Campaign Financing Act - Contribution Limits</a> (PDF)</li>
+            <li><a href='http://www.elections.il.gov/CampaignDisclosure/GlossaryAE.aspx'>Campaign Disclosure Glossary A - E</a></li>
+            <li><a href='http://www.elections.il.gov/CampaignDisclosure/faq.aspx'>Frequently Asked Questions about Campaign Disclosure</a></li>
+          </ul>
           <hr />
 
           <p class='pull-left'>Source: <a href='http://www.elections.state.il.us/CampaignDisclosure/ContributionsSearchByAllContributions.aspx'>Illinois State Board of Elections</a></p>
