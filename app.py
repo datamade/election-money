@@ -19,26 +19,29 @@ app.config['PROPAGATE_EXCEPTIONS'] = True
 @app.route('/')
 # @cache.cached(timeout=60*10) # cache for 10 min
 def index():
+  return render_app_template('index.html')
 
-  try:
+@app.route('/list/<list_type>/')
+def get_list_type(list_type):
     conn = boto.connect_s3()
     bucket = conn.get_bucket('il-elections')
-
-    # for geting folder listings: http://docs.pythonboto.org/en/latest/ref/s3.html?highlight=s3connection#boto.s3.bucket.Bucket.list
-    receipts_list = [key for key in bucket.list("Receipts/", "/")]
-    expenditures_list = [key for key in bucket.list("Expenditures/", "/")]
-    committees_list = [key for key in bucket.list("Committees")]
-    officers_list = [key for key in bucket.list("Officers")]
-    file_list = [key for key in bucket.list()]
-
-  except ValueError:
-      print "Error opening S3 bucket"
-
-  return render_app_template('index.html', 
-    receipts_list=receipts_list, 
-    expenditures_list=expenditures_list,
-    committees_list=committees_list,
-    officers_list=officers_list)
+    bucket_list = bucket.list(list_type.title())
+    list_list = [key for key in bucket_list]
+    resp_list = []
+    for key in list_list:
+        if key.size > 0:
+            d = {
+                'bucket': key.bucket.name,
+                'size': format_file(key.size),
+                'size_bytes': key.size,
+                'name': key.name.encode('utf-8'),
+                'modified_date': format_datetime(key.last_modified),
+                'last_modified': key.last_modified,
+            }
+            resp_list.append(d)
+    resp = make_response(json.dumps(resp_list))
+    resp.headers['Content-Type'] = 'application/json'
+    return resp
 
 # UTILITY
 @app.template_filter('format_file')

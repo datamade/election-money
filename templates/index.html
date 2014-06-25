@@ -38,27 +38,145 @@
               <i class='fa fa-child'></i>
             </h1>
             <h2>Illinois State Board of Elections<br />Bulk Downloads</h2>
-            
+
             <p>Interested in money in Illinois politics? Below are bulk downloads of Illinois campaign contributions and expenditures from the <a href='http://www.elections.il.gov'>Illinois State Board of Elections</a> going back to 1989.</p>
-            
+
           </div>
 
           <p class='text-center'>
+            <a class='btn btn-default btn-sm' href='#candidates'><i class='fa fa-check-square-o'></i> Candidates</a>
             <a class='btn btn-default btn-sm' href='#committees'><i class='fa fa-users'></i> Political committees</a>
             <a class='btn btn-default btn-sm' href='#officers'><i class='fa fa-user'></i> Committee officers</a>
             <a class='btn btn-default btn-sm' href='#receipts'>
               <i class='fa fa-dollar'></i>
               <i class='fa fa-long-arrow-right'></i>
-              <i class='fa fa-users'></i> 
+              <i class='fa fa-users'></i>
               Campaign contributions
             </a>
             <a class='btn btn-default btn-sm' href='#expenditures'>
-              <i class='fa fa-users'></i> 
-              <i class='fa fa-long-arrow-right'></i> 
+              <i class='fa fa-users'></i>
+              <i class='fa fa-long-arrow-right'></i>
               <i class='fa fa-dollar'></i>
               Campaign expenditures
             </a>
           </p>
+
+          <h3 id='candidates'><i class='fa fa-check-square-o'></i> Candidates</h3>
+          <!-- <p><strong>Political commitees registered in Illinois.</strong> Includes candidate political committees, political party committees, political action committees, independent-expenditure-only PACs, and ballot initiative committees. <br />Updated once a week on Tuesdays.</p> -->
+          <div class="panel-group" id="candidates_accordion">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#candidates_accordion" href="#candidates_collapse">
+                    <i class='fa fa-question-circle'></i>
+                    Field definitions - Candidates
+                  </a>
+                </h4>
+              </div>
+              <div id="candidates_collapse" class="panel-collapse collapse">
+                <div class="panel-body">
+                  <table class='table'>
+                    <thead>
+                      <tr>
+                        <th>Field</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>ID</td>
+                        <td>Candidate ID given by the Illinois State Board of Elections</td>
+                      </tr>
+                      <tr>
+                        <td>BracketID</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>SlateID</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>LastName</td>
+                        <td>Candidate last name</td>
+                      </tr>
+                      <tr>
+                        <td>FirstName</td>
+                        <td>Candidate first name</td>
+                      </tr>
+                      <tr>
+                        <td>AffilCommit</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>Address1, Address2, City, State, Zip</td>
+                        <td>Address components as separate fields</td>
+                      </tr>
+                      <tr>
+                        <td>FileDateTime</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>Sequence</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>Status</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>StatusDateTime</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>WebsiteAddress</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>ElectionDate</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>ElectionType</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>PartyName</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>PartySequence</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>OfficeName</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>OfficeBallotGroup</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>OfficeSequence</td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <table class='table table-bordered' id="candidate_list">
+            <thead>
+              <tr>
+                <th>File</th>
+                <th>Size</th>
+                <th>Last modified</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
 
           <h3 id='committees'><i class='fa fa-users'></i> Political committees</h3>
           <p><strong>Political commitees registered in Illinois.</strong> Includes candidate political committees, political party committees, political action committees, independent-expenditure-only PACs, and ballot initiative committees. <br />Updated once a week on Tuesdays.</p>
@@ -87,40 +205,40 @@
                         <td>Committee ID given by the Illinois State Board of Elections</td>
                       </tr>
                       <tr>
-                        <td>name</td>
-                        <td>Committee name</td>
+                        <td>CmteReferName</td>
+                        <td>Committee reference name</td>
                       </tr>
                       <tr>
-                        <td>type</td>
-                        <td>Ballot Initiative, Candidate, Political Action or Political Party</td>
+                        <td>StateCmte</td>
+                        <td>Boolean flag indicating whether the committee is a state level committee</td>
                       </tr>
                       <tr>
-                        <td>url</td>
-                        <td>Link to this committee on the Illinois State Board of Elections</td>
+                        <td>StateID</td>
+                        <td>State level committee ID</td>
                       </tr>
                       <tr>
-                        <td>address</td>
-                        <td>Mailing address of the committee</td>
+                        <td>LocalCmte</td>
+                        <td>Boolean flag indicating whether the committee is a local level committee</td>
                       </tr>
                       <tr>
-                        <td>status</td>
-                        <td>Active or Final</td>
+                        <td>LocalID</td>
+                        <td>Local level committee ID</td>
                       </tr>
                       <tr>
-                        <td>purpose</td>
-                        <td>Stated purpose of the committee</td>
+                        <td>Address1, Address2, Address3, City, State, Zip</td>
+                        <td>Address components as separate fields</td>
                       </tr>
                       <tr>
-                        <td>state_id</td>
-                        <td></td>
+                        <td>Status</td>
+                        <td>Either "F" for final (meaning no longer active) or "A" for active</td>
                       </tr>
                       <tr>
-                        <td>local_id</td>
-                        <td></td>
+                        <td>StatusDate</td>
+                        <td>Effective date of the listed status</td>
                       </tr>
                       <tr>
-                        <td>creation_date</td>
-                        <td>The date on which a political committee's filing obligations begin. A political committee must begin filing disclosure reports when it either receives or expends in excess of $3000 within any twelve month period on behalf of or in opposition to a candidate or proposition.</td>
+                        <td>TypeOfCommittee</td>
+                        <td>Type of committee: Political Action, Political Party or Candidate (is available)</td>
                       </tr>
                     </tbody>
                   </table>
@@ -129,7 +247,17 @@
             </div>
           </div>
 
-          {{ file_table('committees_list', committees_list) }}
+          <table class='table table-bordered' id="committee_list">
+            <thead>
+              <tr>
+                <th>File</th>
+                <th>Size</th>
+                <th>Last modified</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
 
           <h3 id='officers'><i class='fa fa-user'></i> Committee officers</h3>
           <p><strong>Officers for each committee.</strong> Each political committee must have both a chairman and a treasurer. One person may hold both positions. A candidate may serve as his own chairman and treasurer. No financial transactions may take place while there is a vacancy in either office. <br />Updated once a week on Tuesdays.</p>
@@ -181,12 +309,22 @@
             </div>
           </div>
 
-          {{ file_table('officers_list', officers_list) }}
+          <table class='table table-bordered' id="officers_list">
+            <thead>
+              <tr>
+                <th>File</th>
+                <th>Size</th>
+                <th>Last modified</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
 
           <h3 id='receipts'>
             <i class='fa fa-dollar'></i>
             <i class='fa fa-long-arrow-right'></i>
-            <i class='fa fa-users'></i> 
+            <i class='fa fa-users'></i>
             Campaign contributions
           </h3>
           <p><strong>Itemized contributions to political committees in Illinois from 1989 to present.</strong> Includes any gift, subscription, donation, dues, loans, advance, deposit of money, anything of value, purchase of fund-raising tickets, or transfer of funds knowingly received to support or oppose a candidate or proposition.<br />Updated daily.</p>
@@ -354,11 +492,21 @@
             </div>
           </div>
 
-          {{ file_table('receipts_list', receipts_list) }}
+          <table class='table table-bordered' id="receipts_list">
+            <thead>
+              <tr>
+                <th>File</th>
+                <th>Size</th>
+                <th>Last modified</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
 
           <h3 id='expenditures'>
-            <i class='fa fa-users'></i> 
-            <i class='fa fa-long-arrow-right'></i> 
+            <i class='fa fa-users'></i>
+            <i class='fa fa-long-arrow-right'></i>
             <i class='fa fa-dollar'></i>
             Campaign expenditures
           </h3>
@@ -507,7 +655,17 @@
             </div>
           </div>
 
-          {{ file_table('expenditures_list', expenditures_list) }}
+          <table class='table table-bordered' id="expenditures_list">
+            <thead>
+              <tr>
+                <th>File</th>
+                <th>Size</th>
+                <th>Last modified</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
 
           <h3>Understanding the data</h3>
           <p>Interested in learning more about campaign finance disclosure in Illinois? Here are a few useful resources:</p>
@@ -532,14 +690,26 @@
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
     <script src="/static/js/jquery.dataTables.min.js"></script>
-    <script src="/static/js/jquery.dataTables.sorting.js"></script>
+    <script src="/static/js/spin.min.js"></script>
+    <script src="/static/js/jquery.spin.js"></script>
     <script src="/static/js/app.js"></script>
     <script src="/static/js/analytics_lib.js"></script>
 
     <script type="text/javascript">
-      makeDataTable('receipts_list');
-      makeDataTable('expenditures_list');
+      function makeDataTable(el) {
+        $("#" + el).dataTable( {
+            "aaSorting": [ [0,'desc'] ],
+            "aoColumns": [
+                null,
+                { "sType": "data-value-num" },
+                { "sType": "data-value-string" }
+            ],
+            "bInfo": false,
+            "bFilter": false,
+            "bPaginate": false
+        });
+      }
     </script>
-        
+
     </body>
 </html>
