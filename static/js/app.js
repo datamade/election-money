@@ -1,5 +1,4 @@
 (function(){
-
     load_list('candidates');
     load_list('committees');
     load_list('receipts');

@@ -707,6 +707,99 @@
             </tbody>
           </table>
 
+          <h3 id='reports'>
+            <i class='fa fa-files-o'></i>
+            Committee Reports
+          </h3>
+          <p><strong>Periodic summary reports of fiscal activity for committees</strong> Includes summaries of receipt, expenditures and investment activity for committees for a given reporting cycle. These files also include A-1 Reports of individual contributions over $1000<br />Updated daily.</p>
+
+          <div class="panel-group" id="reports_accordion">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#reports_accordion" href="#reports_collapse">
+                    <i class='fa fa-question-circle'></i>
+                    Field definitions - Committee Reports
+                  </a>
+                </h4>
+              </div>
+              <div id="reports_collapse" class="panel-collapse collapse">
+                <div class="panel-body">
+                  <table class='table'>
+                    <thead>
+                      <tr>
+                        <th>Field</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>id</td>
+                        <td>Unique ID for the report</td>
+                      </tr>
+                      <tr>
+                        <td>committee_id</td>
+                        <td>ID of the committee that submitted the report</td>
+                      </tr>
+                      <tr>
+                        <td>period_from</td>
+                        <td>Starting date of the reporting period</td>
+                      </tr>
+                      <tr>
+                        <td>period_to</td>
+                        <td>Ending date of the reporting period</td>
+                      </tr>
+                      <tr>
+                        <td>date_filed</td>
+                        <td>Date the report was filed</td>
+                      </tr>
+                      <tr>
+                        <td>type</td>
+                        <td>Type of report (Quarterly, Semiannual, or A-1) </td>
+                      </tr>
+                      <tr>
+                        <td>funds_start</td>
+                        <td>Dollar amount the committee had at the beginning of the reporting period</td>
+                      </tr>
+                      <tr>
+                        <td>funds_end</td>
+                        <td>Dollar amount the committee hasd at the end of the reporting period</td>
+                      </tr>
+                      <tr>
+                        <td>receipts</td>
+                        <td>Dollar amount received by the committee during the reporting period</td>
+                      </tr>
+                      <tr>
+                        <td>expenditures</td>
+                        <td>Dollar amount spent by the committee during the reporting period</td>
+                      </tr>
+                      <tr>
+                        <td>invest_total</td>
+                        <td>Total investments controlled by the committee at the end of the reporting period</td>
+                      </tr>
+                      <tr>
+                        <td>detail_url</td>
+                        <td>URL for the detail page of the report on the IL Board of Elections website</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <table class='table table-bordered' id="receipts_list">
+            <thead>
+              <tr>
+                <th>File</th>
+                <th>Size</th>
+                <th>Last modified</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+
           <h3>Understanding the data</h3>
           <p>Interested in learning more about campaign finance disclosure in Illinois? Here are a few useful resources:</p>
 
