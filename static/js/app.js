@@ -4,6 +4,7 @@
     load_list('receipts');
     load_list('expenditures');
     load_list('officers');
+    load_list('reports');
 })()
 
 function load_list(el){
