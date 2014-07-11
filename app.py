@@ -21,6 +21,11 @@ app.config['PROPAGATE_EXCEPTIONS'] = True
 def index():
   return render_app_template('index.html')
 
+@app.route('/about')
+# @cache.cached(timeout=60*10) # cache for 10 min
+def about():
+  return render_app_template('about.html')
+
 @app.route('/list/<list_type>/')
 def get_list_type(list_type):
     conn = boto.connect_s3()

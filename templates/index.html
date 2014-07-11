@@ -1,855 +1,822 @@
+{% extends 'base.html' %}
+
 {% from "partials/file_table.html" import file_table %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <title>Election Money - Bulk Data from the Illinois State Board of Elections</title>
+{% block content %}
+<div class='jumbotron'>
+  <h1>
+    <i class='fa fa-dollar'></i>
+    <i class='fa fa-university'></i>
+    <i class='fa fa-download'></i>
+    <i class='fa fa-child'></i>
+  </h1>
+  <h1>Election Money</h1>
+  <h2>Bulk Data from the Illinois State Board of Elections</h2>
 
-    <!-- Bootstrap core CSS -->
-    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+  <p>Interested in money in <strong>Illinois</strong> politics? Below are bulk downloads of Illinois campaign contributions and expenditures from the <a href='http://www.elections.il.gov'>Illinois State Board of Elections</a> going back to 1989.</p>
 
-    <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" />
-    <link href="/static/css/custom.css" rel="stylesheet">
+</div>
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
+<p class='text-center'>
+  <a class='btn btn-default btn-sm' href='#candidates'><i class='fa fa-check-square-o'></i> Candidates</a>
+  <a class='btn btn-default btn-sm' href='#committees'><i class='fa fa-users'></i> Political committees</a>
+  <a class='btn btn-default btn-sm' href='#officers'><i class='fa fa-user'></i> Committee officers</a>
+</p>
+<p class='text-center'>
+  <a class='btn btn-default btn-sm' href='#receipts'>
+    <i class='fa fa-dollar'></i>
+    <i class='fa fa-long-arrow-right'></i>
+    <i class='fa fa-users'></i>
+    Campaign contributions
+  </a>
+  <a class='btn btn-default btn-sm' href='#expenditures'>
+    <i class='fa fa-users'></i>
+    <i class='fa fa-long-arrow-right'></i>
+    <i class='fa fa-dollar'></i>
+    Campaign expenditures
+  </a>
+  <a class='btn btn-default btn-sm' href='#reports'>
+    <i class='fa fa-files-o'></i>
+    Committee reports
+  </a>
+</p>
 
-  <body>
-
-    <div class='container'>
-      <div class='row'>
-        <div class='col-md-10 col-md-offset-1'>
-
-          <div class='jumbotron'>
-            <h1>
-              <i class='fa fa-dollar'></i>
-              <i class='fa fa-university'></i>
-              <i class='fa fa-download'></i>
-              <i class='fa fa-child'></i>
-            </h1>
-            <h1>Election Money</h1>
-            <h2>Bulk Data from the Illinois State Board of Elections</h2>
-
-            <p>Interested in money in <strong>Illinois</strong> politics? Below are bulk downloads of Illinois campaign contributions and expenditures from the <a href='http://www.elections.il.gov'>Illinois State Board of Elections</a> going back to 1989.</p>
-
-          </div>
-
-          <p class='text-center'>
-            <a class='btn btn-default btn-sm' href='#candidates'><i class='fa fa-check-square-o'></i> Candidates</a>
-            <a class='btn btn-default btn-sm' href='#committees'><i class='fa fa-users'></i> Political committees</a>
-            <a class='btn btn-default btn-sm' href='#officers'><i class='fa fa-user'></i> Committee officers</a>
-          </p>
-          <p class='text-center'>
-            <a class='btn btn-default btn-sm' href='#receipts'>
-              <i class='fa fa-dollar'></i>
-              <i class='fa fa-long-arrow-right'></i>
-              <i class='fa fa-users'></i>
-              Campaign contributions
-            </a>
-            <a class='btn btn-default btn-sm' href='#expenditures'>
-              <i class='fa fa-users'></i>
-              <i class='fa fa-long-arrow-right'></i>
-              <i class='fa fa-dollar'></i>
-              Campaign expenditures
-            </a>
-            <a class='btn btn-default btn-sm' href='#reports'>
-              <i class='fa fa-files-o'></i>
-              Committee reports
-            </a>
-          </p>
-
-          <h3 id='candidates'><i class='fa fa-check-square-o'></i> Candidates</h3>
-          <!-- <p><strong>Political commitees registered in Illinois.</strong> Includes candidate political committees, political party committees, political action committees, independent-expenditure-only PACs, and ballot initiative committees. <br />Updated once a week on Tuesdays.</p> -->
-          <div class="panel-group" id="candidates_accordion">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#candidates_accordion" href="#candidates_collapse">
-                    <i class='fa fa-question-circle'></i>
-                    Field definitions - Candidates
-                  </a>
-                </h4>
-              </div>
-              <div id="candidates_collapse" class="panel-collapse collapse">
-                <div class="panel-body">
-                  <table class='table'>
-                    <thead>
-                      <tr>
-                        <th>Field</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>ID</td>
-                        <td>Candidate ID given by the Illinois State Board of Elections</td>
-                      </tr>
-                      <tr>
-                        <td>BracketID</td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td>SlateID</td>
-                        <td>ID of candidates group that run in multi-seat or multi-position elections on a common platform</td>
-                      </tr>
-                      <tr>
-                        <td>LastName</td>
-                        <td>Candidate last name</td>
-                      </tr>
-                      <tr>
-                        <td>FirstName</td>
-                        <td>Candidate first name</td>
-                      </tr>
-                      <tr>
-                        <td>AffilCommit</td>
-                        <td>Affiliated committee</td>
-                      </tr>
-                      <tr>
-                        <td>HeadOfSlate</td>
-                        <td>Head candidate in a group that run in multi-seat or multi-position elections on a common platform</td>
-                      </tr>
-                      <tr>
-                        <td>Address1</td>
-                        <td>Mailing address line 1 of candidate</td>
-                      </tr>
-                      <tr>
-                        <td>Address2</td>
-                        <td>Mailing address line 2 of candidate</td>
-                      </tr>
-                      <tr>
-                        <td>City</td>
-                        <td>Mailing city of candidate</td>
-                      </tr>
-                      <tr>
-                        <td>State</td>
-                        <td>Mailing state of candidate</td>
-                      </tr>
-                      <tr>
-                        <td>Zip</td>
-                        <td>Mailing zip code of candidate</td>
-                      </tr>
-                      <tr>
-                        <td>FileDateTime</td>
-                        <td>Date and time when the candidate filed for candidacy</td>
-                      </tr>
-                      <tr>
-                        <td>Sequence</td>
-                        <td>Ballot sequence</td>
-                      </tr>
-                      <tr>
-                        <td>Status</td>
-                        <td>A = Active, D = Late Withdrawal, P = Withdrawal Pending, R = Removed, W = Withdrawn</td>
-                      </tr>
-                      <tr>
-                        <td>StatusDateTime</td>
-                        <td>Date and time status was set</td>
-                      </tr>
-                      <tr>
-                        <td>WebsiteAddress</td>
-                        <td>Candidate website</td>
-                      </tr>
-                      <tr>
-                        <td>ElectionDate</td>
-                        <td>Election date</td>
-                      </tr>
-                      <tr>
-                        <td>ElectionType</td>
-                        <td>Type of election. CE = Consolodated Election, GE = General Election, GP = General Primary, SE = Special General Election, SP = Special Primary</td>
-                      </tr>
-                      <tr>
-                        <td>PartyName</td>
-                        <td>Political party</td>
-                      </tr>
-                      <tr>
-                        <td>PartySequence</td>
-                        <td>Ballot sequence</td>
-                      </tr>
-                      <tr>
-                        <td>OfficeName</td>
-                        <td>Name of office candidate is running for</td>
-                      </tr>
-                      <tr>
-                        <td>OfficeBallotGroup</td>
-                        <td>Field values: A, B, F, G, H, J, K, KX, LA, LB, LC, LD, RA, RB, RC, S or T</td>
-                      </tr>
-                      <tr>
-                        <td>OfficeSequence</td>
-                        <td>Ballot sequence</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <table class='table table-bordered' id="candidates_list">
-            <thead>
-              <tr>
-                <th>File</th>
-                <th>Size</th>
-                <th>Last modified</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-
-          <h3 id='committees'><i class='fa fa-users'></i> Political committees</h3>
-          <p><strong>Political commitees registered in Illinois.</strong> Includes candidate political committees, political party committees, political action committees, independent-expenditure-only PACs, and ballot initiative committees. <br />Updated once a week on Tuesdays.</p>
-          <div class="panel-group" id="committees_accordion">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#committees_accordion" href="#committees_collapse">
-                    <i class='fa fa-question-circle'></i>
-                    Field definitions - Political committees
-                  </a>
-                </h4>
-              </div>
-              <div id="committees_collapse" class="panel-collapse collapse">
-                <div class="panel-body">
-                  <table class='table'>
-                    <thead>
-                      <tr>
-                        <th>Field</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>id</td>
-                        <td>Committee ID given by the Illinois State Board of Elections</td>
-                      </tr>
-                      <tr>
-                        <td>CmteReferName</td>
-                        <td>Used by the Illinois State Board of Elections internally to identify the committee</td>
-                      </tr>
-                      <tr>
-                        <td>StateCmte</td>
-                        <td>Boolean flag indicating whether the committee is a state level committee</td>
-                      </tr>
-                      <tr>
-                        <td>StateID</td>
-                        <td>State level committee ID</td>
-                      </tr>
-                      <tr>
-                        <td>LocalCmte</td>
-                        <td>Boolean flag indicating whether the committee is a local level committee</td>
-                      </tr>
-                      <tr>
-                        <td>LocalID</td>
-                        <td>Local level committee ID</td>
-                      </tr>
-                      <tr>
-                        <td>Address1</td>
-                        <td>Mailing address line 1 of committee</td>
-                      </tr>
-                      <tr>
-                        <td>Address2</td>
-                        <td>Mailing address line 2 of committee</td>
-                      </tr>
-                      <tr>
-                        <td>Address3</td>
-                        <td>Mailing address line 2 of committee</td>
-                      </tr>
-                      <tr>
-                        <td>City</td>
-                        <td>Mailing city of committee</td>
-                      </tr>
-                      <tr>
-                        <td>State</td>
-                        <td>Mailing state of committee</td>
-                      </tr>
-                      <tr>
-                        <td>Zip</td>
-                        <td>Mailing zip code of committee</td>
-                      </tr>
-                      <tr>
-                        <td>Status</td>
-                        <td>Either "F" for final (meaning no longer active) or "A" for active</td>
-                      </tr>
-                      <tr>
-                        <td>StatusDate</td>
-                        <td>Effective date of the listed status</td>
-                      </tr>
-                      <tr>
-                        <td>TypeOfCommittee</td>
-                        <td>Type of committee: Political Action, Political Party or Candidate (is available)</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <table class='table table-bordered' id="committees_list">
-            <thead>
-              <tr>
-                <th>File</th>
-                <th>Size</th>
-                <th>Last modified</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-
-          <h3 id='officers'><i class='fa fa-user'></i> Committee officers</h3>
-          <p><strong>Officers for each committee.</strong> Each political committee must have both a chairman and a treasurer. One person may hold both positions. A candidate may serve as his own chairman and treasurer. No financial transactions may take place while there is a vacancy in either office. <br />Updated once a week on Tuesdays.</p>
-
-          <div class="panel-group" id="officers_accordion">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#officers_accordion" href="#officers_collapse">
-                    <i class='fa fa-question-circle'></i>
-                    Field definitions - Committee officers
-                  </a>
-                </h4>
-              </div>
-              <div id="officers_collapse" class="panel-collapse collapse">
-                <div class="panel-body">
-                  <table class='table'>
-                    <thead>
-                      <tr>
-                        <th>Field</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>id</td>
-                        <td>Officer ID given by the Illinois State Board of Elections</td>
-                      </tr>
-                      <tr>
-                        <td>committee_id</td>
-                        <td>ID of the committee they are an officer of</td>
-                      </tr>
-                      <tr>
-                        <td>name</td>
-                        <td>Officer name</td>
-                      </tr>
-                      <tr>
-                        <td>title</td>
-                        <td>Officer title. Typically Treasurer or Chairman</td>
-                      </tr>
-                      <tr>
-                        <td>address</td>
-                        <td>Mailing address of the officer</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <table class='table table-bordered' id="officers_list">
-            <thead>
-              <tr>
-                <th>File</th>
-                <th>Size</th>
-                <th>Last modified</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-
-          <h3 id='receipts'>
-            <i class='fa fa-dollar'></i>
-            <i class='fa fa-long-arrow-right'></i>
-            <i class='fa fa-users'></i>
-            Campaign contributions
-          </h3>
-          <p><strong>Itemized contributions to political committees in Illinois from 1989 to present.</strong> Includes any gift, subscription, donation, dues, loans, advance, deposit of money, anything of value, purchase of fund-raising tickets, or transfer of funds knowingly received to support or oppose a candidate or proposition.<br />Updated daily.</p>
-
-          <div class="panel-group" id="receipts_accordion">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#receipts_accordion" href="#receipts_collapse">
-                    <i class='fa fa-question-circle'></i>
-                    Field definitions - Campaign contributions
-                  </a>
-                </h4>
-              </div>
-              <div id="receipts_collapse" class="panel-collapse collapse">
-                <div class="panel-body">
-                  <table class='table'>
-                    <thead>
-                      <tr>
-                        <th>Field</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>CommitteeID</td>
-                        <td>ID of the committee the contribution was given to</td>
-                      </tr>
-                      <tr>
-                        <td>LastOnlyName</td>
-                        <td>Individual last name or organization name of contributor</td>
-                      </tr>
-                      <tr>
-                        <td>FirstName</td>
-                        <td>First name of contributor</td>
-                      </tr>
-                      <tr>
-                        <td>RcvDate</td>
-                        <td>A contribution is deemed received on the date (i) a monetary contribution was deposited in a bank, financial institution, or other repository of funds for the committee, (ii) the date a committee receives notice a monetary contribution was deposited by an entity used to process financial transactions by credit card or other entity used for processing a monetary contribution that was deposited in a bank, financial institution, or other repository of funds for the committee, or (iii) for inkind contributions, possession of which is not actually obtained by the recipient committee, the public official, candidate, or political committee receives the notification of contribution of goods or services.</td>
-                      </tr>
-                      <tr>
-                        <td>Amount</td>
-                        <td>Contribution amount</td>
-                      </tr>
-                      <tr>
-                        <td>LoanAmount</td>
-                        <td>If RctType is 'Loan Received', the amount of the loan.</td>
-                      </tr>
-                      <tr>
-                        <td>Occupation</td>
-                        <td>Occupation of contributor</td>
-                      </tr>
-                      <tr>
-                        <td>Employer</td>
-                        <td>Employer of contributor</td>
-                      </tr>
-                      <tr>
-                        <td>Address1</td>
-                        <td>Mailing address line 1 of contributor</td>
-                      </tr>
-                      <tr>
-                        <td>Address2</td>
-                        <td>Mailing address line 2 of contributor</td>
-                      </tr>
-                      <tr>
-                        <td>City</td>
-                        <td>Mailing city of contributor</td>
-                      </tr>
-                      <tr>
-                        <td>State</td>
-                        <td>Mailing state of contributor</td>
-                      </tr>
-                      <tr>
-                        <td>Zip</td>
-                        <td>Mailing zip code of contributor</td>
-                      </tr>
-                      <tr>
-                        <td>RctType</td>
-                        <td>Type of contribution. Individual Contribution, In-kind Contribution, Transfer In, Loan Received or Other Receipt</td>
-                      </tr>
-                      <tr>
-                        <td>Description</td>
-                        <td>Description of contribution</td>
-                      </tr>
-                      <tr>
-                        <td>VendorLastOnlyName</td>
-                        <td>If the contribution was an in-kind donation by a vendor, the individual last name or organization name of the vendor</td>
-                      </tr>
-                      <tr>
-                        <td>VendorFirstName</td>
-                        <td>First name of vendor</td>
-                      </tr>
-                      <tr>
-                        <td>VendorAddress1</td>
-                        <td>Mailing address line 1 of vendor</td>
-                      </tr>
-                      <tr>
-                        <td>VendorAddress2</td>
-                        <td>Mailing address line 2 of vendor</td>
-                      </tr>
-                      <tr>
-                        <td>VendorCity</td>
-                        <td>Mailing city of vendor</td>
-                      </tr>
-                      <tr>
-                        <td>VendorState</td>
-                        <td>Mailing state of vendor</td>
-                      </tr>
-                      <tr>
-                        <td>VendorZip</td>
-                        <td>Mailing zip code of vendor</td>
-                      </tr>
-                      <tr>
-                        <td>RptType</td>
-                        <td>Report type. A-1, Final or Quarterly</td>
-                      </tr>
-                      <tr>
-                        <td>ElectionType</td>
-                        <td><em>Typically blank</em></td>
-                      </tr>
-                      <tr>
-                        <td>ElectionYear</td>
-                        <td><em>Typically blank</em></td>
-                      </tr>
-                      <tr>
-                        <td>RptPdBegDate</td>
-                        <td>Report period begin date</td>
-                      </tr>
-                      <tr>
-                        <td>RptPdEndDate</td>
-                        <td>Report period end date</td>
-                      </tr>
-                      <tr>
-                        <td>RptRcvdDate</td>
-                        <td>Date report was received</td>
-                      </tr>
-                      <tr>
-                        <td>CmteReferName</td>
-                        <td>Used by the Illinois State Board of Elections internally to identify the committee</td>
-                      </tr>
-                      <tr>
-                        <td>CmteName</td>
-                        <td>Name of the committee the contribution was given to</td>
-                      </tr>
-                      <tr>
-                        <td>StateCmte</td>
-                        <td>True or False</td>
-                      </tr>
-                      <tr>
-                        <td>StateID</td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td>LocalCmte</td>
-                        <td>True or False</td>
-                      </tr>
-                      <tr>
-                        <td>LocalID</td>
-                        <td></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <table class='table table-bordered' id="receipts_list">
-            <thead>
-              <tr>
-                <th>File</th>
-                <th>Size</th>
-                <th>Last modified</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-
-          <h3 id='expenditures'>
-            <i class='fa fa-users'></i>
-            <i class='fa fa-long-arrow-right'></i>
-            <i class='fa fa-dollar'></i>
-            Campaign expenditures
-          </h3>
-          <p><strong>Itemized expenditures by political committees.</strong> Any payment, distribution, purchase, loan, advance, deposit, gift of money or anything of value, or any transfer of funds between political committees, made to support or oppose a candidate or proposition. The definition also includes an electioneering communication.<br />Updated daily (though the data is released quarterly).</p>
-
-          <div class="panel-group" id="expenditures_accordion">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#expenditures_accordion" href="#expenditures_collapse">
-                    <i class='fa fa-question-circle'></i>
-                    Field definitions - Campaign expenditures
-                  </a>
-                </h4>
-              </div>
-              <div id="expenditures_collapse" class="panel-collapse collapse">
-                <div class="panel-body">
-                  <table class='table'>
-                    <thead>
-                      <tr>
-                        <th>Field</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>CommitteeID</td>
-                        <td>ID of the committee the contribution was given to</td>
-                      </tr>
-                      <tr>
-                        <td>LastOnlyName</td>
-                        <td>Individual last name or organization name of expenditure recipient</td>
-                      </tr>
-                      <tr>
-                        <td>FirstName</td>
-                        <td>Individual first name of expenditure recipient</td>
-                      </tr>
-                      <tr>
-                        <td>ExpendedDate</td>
-                        <td>Date the expenditure was made</td>
-                      </tr>
-                      <tr>
-                        <td>Amount</td>
-                        <td>Expenditure amount</td>
-                      </tr>
-                      <tr>
-                        <td>Address1</td>
-                        <td>Mailing address line 1 of recipient</td>
-                      </tr>
-                      <tr>
-                        <td>Address2</td>
-                        <td>Mailing address line 2 of recipient</td>
-                      </tr>
-                      <tr>
-                        <td>City</td>
-                        <td>Mailing city of recipient</td>
-                      </tr>
-                      <tr>
-                        <td>State</td>
-                        <td>Mailing state of recipient</td>
-                      </tr>
-                      <tr>
-                        <td>Zip</td>
-                        <td>Mailing zip code of recipient</td>
-                      </tr>
-                      <tr>
-                        <td>ExpType</td>
-                        <td>Expenditure type. Expenditure, Transfer Out, 9B or Loan Made</td>
-                      </tr>
-                      <tr>
-                        <td>Purpose</td>
-                        <td>Purpose of expenditure</td>
-                      </tr>
-                      <tr>
-                        <td>Beneficiary</td>
-                        <td>The candidate or political committee deemed to have received the benefit from an expenditure. </td>
-                      </tr>
-                      <tr>
-                        <td>CandidateName</td>
-                        <td>Name of candidate affiliated with the committee</td>
-                      </tr>
-                      <tr>
-                        <td>Office</td>
-                        <td>Seeking office of candidate. <em>Typically blank</em></td>
-                      </tr>
-                      <tr>
-                        <td>Supporting</td>
-                        <td>True if the committee is supporting the candidate or ballot initiative</td>
-                      </tr>
-                      <tr>
-                        <td>Opposing</td>
-                        <td>True if the committee is opposing the candidate or ballot initiative</td>
-                      </tr>
-                      <tr>
-                        <td>RptType</td>
-                        <td>Report type. Quarterly or Final</td>
-                      </tr>
-                      <tr>
-                        <td>ElectionType</td>
-                        <td><em>Typically blank</em></td>
-                      </tr>
-                      <tr>
-                        <td>ElectionYear</td>
-                        <td><em>Typically blank</em></td>
-                      </tr>
-                      <tr>
-                        <td>RptPdBegDate</td>
-                        <td>Report period begin date</td>
-                      </tr>
-                      <tr>
-                        <td>RptPdEndDate</td>
-                        <td>Report period end date</td>
-                      </tr>
-                      <tr>
-                        <td>CmteReferName</td>
-                        <td>Used by the Illinois State Board of Elections internally to identify the committee</td>
-                      </tr>
-                      <tr>
-                        <td>CmteName</td>
-                        <td>Committee name</td>
-                      </tr>
-                      <tr>
-                        <td>StateCmte</td>
-                        <td>True or False</td>
-                      </tr>
-                      <tr>
-                        <td>StateID</td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td>LocalCmte</td>
-                        <td>True or False</td>
-                      </tr>
-                      <tr>
-                        <td>LocalID</td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td>RptRcvdDate</td>
-                        <td>Date the report was received</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <table class='table table-bordered' id="expenditures_list">
-            <thead>
-              <tr>
-                <th>File</th>
-                <th>Size</th>
-                <th>Last modified</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-
-          <h3 id='reports'>
-            <i class='fa fa-files-o'></i>
-            Committee reports
-          </h3>
-          <p><strong>Periodic summary reports of fiscal activity for committees</strong> Includes summaries of receipt, expenditures and investment activity for committees for a given reporting cycle. These files also include A-1 Reports of individual contributions over $1000<br />Updated daily.</p>
-
-          <div class="panel-group" id="reports_accordion">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#reports_accordion" href="#reports_collapse">
-                    <i class='fa fa-question-circle'></i>
-                    Field definitions - Committee Reports
-                  </a>
-                </h4>
-              </div>
-              <div id="reports_collapse" class="panel-collapse collapse">
-                <div class="panel-body">
-                  <table class='table'>
-                    <thead>
-                      <tr>
-                        <th>Field</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>id</td>
-                        <td>Unique ID for the report</td>
-                      </tr>
-                      <tr>
-                        <td>committee_id</td>
-                        <td>ID of the committee that submitted the report</td>
-                      </tr>
-                      <tr>
-                        <td>period_from</td>
-                        <td>Starting date of the reporting period</td>
-                      </tr>
-                      <tr>
-                        <td>period_to</td>
-                        <td>Ending date of the reporting period</td>
-                      </tr>
-                      <tr>
-                        <td>date_filed</td>
-                        <td>Date the report was filed</td>
-                      </tr>
-                      <tr>
-                        <td>type</td>
-                        <td>Type of report (Quarterly, Semiannual, or A-1) </td>
-                      </tr>
-                      <tr>
-                        <td>funds_start</td>
-                        <td>Dollar amount the committee had at the beginning of the reporting period</td>
-                      </tr>
-                      <tr>
-                        <td>funds_end</td>
-                        <td>Dollar amount the committee hasd at the end of the reporting period</td>
-                      </tr>
-                      <tr>
-                        <td>receipts</td>
-                        <td>Dollar amount received by the committee during the reporting period</td>
-                      </tr>
-                      <tr>
-                        <td>expenditures</td>
-                        <td>Dollar amount spent by the committee during the reporting period</td>
-                      </tr>
-                      <tr>
-                        <td>invest_total</td>
-                        <td>Total investments controlled by the committee at the end of the reporting period</td>
-                      </tr>
-                      <tr>
-                        <td>detail_url</td>
-                        <td>URL for the detail page of the report on the IL Board of Elections website</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <table class='table table-bordered' id="reports_list">
-            <thead>
-              <tr>
-                <th>File</th>
-                <th>Size</th>
-                <th>Last modified</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-
-          <h3>Understanding the data</h3>
-          <p>Interested in learning more about campaign finance disclosure in Illinois? Here are a few useful resources:</p>
-
-          <ul>
-            <li><a href='http://www.elections.il.gov/downloads/campaigndisclosure/pdf/campdiscguide.pdf'>Official Guide to Campaign Disclosure</a> (PDF)</li>
-            <li><a href='http://www.elections.il.gov/Downloads/CampaignDisclosure/PDF/CampDiscAct.pdf'>Illinois Campaign Disclosure Act</a> (PDF)</li>
-            <li><a href='http://www.elections.il.gov/Downloads/CampaignDisclosure/PDF/Contribution%20Limits.pdf'>Illinois Campaign Financing Act - Contribution Limits</a> (PDF)</li>
-            <li><a href='http://www.elections.il.gov/CampaignDisclosure/GlossaryAE.aspx'>Campaign Disclosure Glossary A - E</a></li>
-            <li><a href='http://www.elections.il.gov/CampaignDisclosure/faq.aspx'>Frequently Asked Questions about Campaign Disclosure</a></li>
-          </ul>
-          <hr />
-
-          <p class='pull-left'>Source: <a href='http://www.elections.state.il.us/CampaignDisclosure/ContributionsSearchByAllContributions.aspx'>Illinois State Board of Elections</a></p>
-
-          <p class='pull-right'>Built by <a href='http://datamade.us'>DataMade</a> | Code on <a href='https://github.com/datamade/il-elections-bulk-download'><i class='fa fa-github'></i> GitHub</a></p>
-
-        </div>
+<h3 id='candidates'><i class='fa fa-check-square-o'></i> Candidates</h3>
+<!-- <p><strong>Political commitees registered in Illinois.</strong> Includes candidate political committees, political party committees, political action committees, independent-expenditure-only PACs, and ballot initiative committees. <br />Updated once a week on Tuesdays.</p> -->
+<div class="panel-group" id="candidates_accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#candidates_accordion" href="#candidates_collapse">
+          <i class='fa fa-question-circle'></i>
+          Field definitions - Candidates
+        </a>
+      </h4>
+    </div>
+    <div id="candidates_collapse" class="panel-collapse collapse">
+      <div class="panel-body">
+        <table class='table'>
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ID</td>
+              <td>Candidate ID given by the Illinois State Board of Elections</td>
+            </tr>
+            <tr>
+              <td>BracketID</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>SlateID</td>
+              <td>ID of candidates group that run in multi-seat or multi-position elections on a common platform</td>
+            </tr>
+            <tr>
+              <td>LastName</td>
+              <td>Candidate last name</td>
+            </tr>
+            <tr>
+              <td>FirstName</td>
+              <td>Candidate first name</td>
+            </tr>
+            <tr>
+              <td>AffilCommit</td>
+              <td>Affiliated committee</td>
+            </tr>
+            <tr>
+              <td>HeadOfSlate</td>
+              <td>Head candidate in a group that run in multi-seat or multi-position elections on a common platform</td>
+            </tr>
+            <tr>
+              <td>Address1</td>
+              <td>Mailing address line 1 of candidate</td>
+            </tr>
+            <tr>
+              <td>Address2</td>
+              <td>Mailing address line 2 of candidate</td>
+            </tr>
+            <tr>
+              <td>City</td>
+              <td>Mailing city of candidate</td>
+            </tr>
+            <tr>
+              <td>State</td>
+              <td>Mailing state of candidate</td>
+            </tr>
+            <tr>
+              <td>Zip</td>
+              <td>Mailing zip code of candidate</td>
+            </tr>
+            <tr>
+              <td>FileDateTime</td>
+              <td>Date and time when the candidate filed for candidacy</td>
+            </tr>
+            <tr>
+              <td>Sequence</td>
+              <td>Ballot sequence</td>
+            </tr>
+            <tr>
+              <td>Status</td>
+              <td>A = Active, D = Late Withdrawal, P = Withdrawal Pending, R = Removed, W = Withdrawn</td>
+            </tr>
+            <tr>
+              <td>StatusDateTime</td>
+              <td>Date and time status was set</td>
+            </tr>
+            <tr>
+              <td>WebsiteAddress</td>
+              <td>Candidate website</td>
+            </tr>
+            <tr>
+              <td>ElectionDate</td>
+              <td>Election date</td>
+            </tr>
+            <tr>
+              <td>ElectionType</td>
+              <td>Type of election. CE = Consolodated Election, GE = General Election, GP = General Primary, SE = Special General Election, SP = Special Primary</td>
+            </tr>
+            <tr>
+              <td>PartyName</td>
+              <td>Political party</td>
+            </tr>
+            <tr>
+              <td>PartySequence</td>
+              <td>Ballot sequence</td>
+            </tr>
+            <tr>
+              <td>OfficeName</td>
+              <td>Name of office candidate is running for</td>
+            </tr>
+            <tr>
+              <td>OfficeBallotGroup</td>
+              <td>Field values: A, B, F, G, H, J, K, KX, LA, LB, LC, LD, RA, RB, RC, S or T</td>
+            </tr>
+            <tr>
+              <td>OfficeSequence</td>
+              <td>Ballot sequence</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
+  </div>
+</div>
 
-    <script src="/static/js/jquery.min.js"></script>
-    <script src="/static/js/bootstrap.min.js"></script>
-    <script src="/static/js/jquery.dataTables.min.js"></script>
-    <script src="/static/js/spin.min.js"></script>
-    <script src="/static/js/jquery.spin.js"></script>
-    <script src="/static/js/app.js"></script>
-    <script src="/static/js/analytics_lib.js"></script>
+<table class='table table-bordered' id="candidates_list">
+  <thead>
+    <tr>
+      <th>File</th>
+      <th>Size</th>
+      <th>Last modified</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
 
-    <script type="text/javascript">
-      function makeDataTable(el) {
-        $("#" + el).dataTable( {
-            "aaSorting": [ [0,'desc'] ],
-            "aoColumns": [
-                null,
-                { "sType": "data-value-num" },
-                { "sType": "data-value-string" }
-            ],
-            "bInfo": false,
-            "bFilter": false,
-            "bPaginate": false
-        });
-      }
-    </script>
+<h3 id='committees'><i class='fa fa-users'></i> Political committees</h3>
+<p><strong>Political commitees registered in Illinois.</strong> Includes candidate political committees, political party committees, political action committees, independent-expenditure-only PACs, and ballot initiative committees. <br />Updated once a week on Tuesdays.</p>
+<div class="panel-group" id="committees_accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#committees_accordion" href="#committees_collapse">
+          <i class='fa fa-question-circle'></i>
+          Field definitions - Political committees
+        </a>
+      </h4>
+    </div>
+    <div id="committees_collapse" class="panel-collapse collapse">
+      <div class="panel-body">
+        <table class='table'>
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>id</td>
+              <td>Committee ID given by the Illinois State Board of Elections</td>
+            </tr>
+            <tr>
+              <td>CmteReferName</td>
+              <td>Used by the Illinois State Board of Elections internally to identify the committee</td>
+            </tr>
+            <tr>
+              <td>StateCmte</td>
+              <td>Boolean flag indicating whether the committee is a state level committee</td>
+            </tr>
+            <tr>
+              <td>StateID</td>
+              <td>State level committee ID</td>
+            </tr>
+            <tr>
+              <td>LocalCmte</td>
+              <td>Boolean flag indicating whether the committee is a local level committee</td>
+            </tr>
+            <tr>
+              <td>LocalID</td>
+              <td>Local level committee ID</td>
+            </tr>
+            <tr>
+              <td>Address1</td>
+              <td>Mailing address line 1 of committee</td>
+            </tr>
+            <tr>
+              <td>Address2</td>
+              <td>Mailing address line 2 of committee</td>
+            </tr>
+            <tr>
+              <td>Address3</td>
+              <td>Mailing address line 2 of committee</td>
+            </tr>
+            <tr>
+              <td>City</td>
+              <td>Mailing city of committee</td>
+            </tr>
+            <tr>
+              <td>State</td>
+              <td>Mailing state of committee</td>
+            </tr>
+            <tr>
+              <td>Zip</td>
+              <td>Mailing zip code of committee</td>
+            </tr>
+            <tr>
+              <td>Status</td>
+              <td>Either "F" for final (meaning no longer active) or "A" for active</td>
+            </tr>
+            <tr>
+              <td>StatusDate</td>
+              <td>Effective date of the listed status</td>
+            </tr>
+            <tr>
+              <td>TypeOfCommittee</td>
+              <td>Type of committee: Political Action, Political Party or Candidate (is available)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 
-    </body>
-</html>
+<table class='table table-bordered' id="committees_list">
+  <thead>
+    <tr>
+      <th>File</th>
+      <th>Size</th>
+      <th>Last modified</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+<h3 id='officers'><i class='fa fa-user'></i> Committee officers</h3>
+<p><strong>Officers for each committee.</strong> Each political committee must have both a chairman and a treasurer. One person may hold both positions. A candidate may serve as his own chairman and treasurer. No financial transactions may take place while there is a vacancy in either office. <br />Updated once a week on Tuesdays.</p>
+
+<div class="panel-group" id="officers_accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#officers_accordion" href="#officers_collapse">
+          <i class='fa fa-question-circle'></i>
+          Field definitions - Committee officers
+        </a>
+      </h4>
+    </div>
+    <div id="officers_collapse" class="panel-collapse collapse">
+      <div class="panel-body">
+        <table class='table'>
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>id</td>
+              <td>Officer ID given by the Illinois State Board of Elections</td>
+            </tr>
+            <tr>
+              <td>committee_id</td>
+              <td>ID of the committee they are an officer of</td>
+            </tr>
+            <tr>
+              <td>name</td>
+              <td>Officer name</td>
+            </tr>
+            <tr>
+              <td>title</td>
+              <td>Officer title. Typically Treasurer or Chairman</td>
+            </tr>
+            <tr>
+              <td>address</td>
+              <td>Mailing address of the officer</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<table class='table table-bordered' id="officers_list">
+  <thead>
+    <tr>
+      <th>File</th>
+      <th>Size</th>
+      <th>Last modified</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+<h3 id='receipts'>
+  <i class='fa fa-dollar'></i>
+  <i class='fa fa-long-arrow-right'></i>
+  <i class='fa fa-users'></i>
+  Campaign contributions
+</h3>
+<p><strong>Itemized contributions to political committees in Illinois from 1989 to present.</strong> Includes any gift, subscription, donation, dues, loans, advance, deposit of money, anything of value, purchase of fund-raising tickets, or transfer of funds knowingly received to support or oppose a candidate or proposition.<br />Updated daily.</p>
+
+<div class="panel-group" id="receipts_accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#receipts_accordion" href="#receipts_collapse">
+          <i class='fa fa-question-circle'></i>
+          Field definitions - Campaign contributions
+        </a>
+      </h4>
+    </div>
+    <div id="receipts_collapse" class="panel-collapse collapse">
+      <div class="panel-body">
+        <table class='table'>
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CommitteeID</td>
+              <td>ID of the committee the contribution was given to</td>
+            </tr>
+            <tr>
+              <td>LastOnlyName</td>
+              <td>Individual last name or organization name of contributor</td>
+            </tr>
+            <tr>
+              <td>FirstName</td>
+              <td>First name of contributor</td>
+            </tr>
+            <tr>
+              <td>RcvDate</td>
+              <td>A contribution is deemed received on the date (i) a monetary contribution was deposited in a bank, financial institution, or other repository of funds for the committee, (ii) the date a committee receives notice a monetary contribution was deposited by an entity used to process financial transactions by credit card or other entity used for processing a monetary contribution that was deposited in a bank, financial institution, or other repository of funds for the committee, or (iii) for inkind contributions, possession of which is not actually obtained by the recipient committee, the public official, candidate, or political committee receives the notification of contribution of goods or services.</td>
+            </tr>
+            <tr>
+              <td>Amount</td>
+              <td>Contribution amount</td>
+            </tr>
+            <tr>
+              <td>LoanAmount</td>
+              <td>If RctType is 'Loan Received', the amount of the loan.</td>
+            </tr>
+            <tr>
+              <td>Occupation</td>
+              <td>Occupation of contributor</td>
+            </tr>
+            <tr>
+              <td>Employer</td>
+              <td>Employer of contributor</td>
+            </tr>
+            <tr>
+              <td>Address1</td>
+              <td>Mailing address line 1 of contributor</td>
+            </tr>
+            <tr>
+              <td>Address2</td>
+              <td>Mailing address line 2 of contributor</td>
+            </tr>
+            <tr>
+              <td>City</td>
+              <td>Mailing city of contributor</td>
+            </tr>
+            <tr>
+              <td>State</td>
+              <td>Mailing state of contributor</td>
+            </tr>
+            <tr>
+              <td>Zip</td>
+              <td>Mailing zip code of contributor</td>
+            </tr>
+            <tr>
+              <td>RctType</td>
+              <td>Type of contribution. Individual Contribution, In-kind Contribution, Transfer In, Loan Received or Other Receipt</td>
+            </tr>
+            <tr>
+              <td>Description</td>
+              <td>Description of contribution</td>
+            </tr>
+            <tr>
+              <td>VendorLastOnlyName</td>
+              <td>If the contribution was an in-kind donation by a vendor, the individual last name or organization name of the vendor</td>
+            </tr>
+            <tr>
+              <td>VendorFirstName</td>
+              <td>First name of vendor</td>
+            </tr>
+            <tr>
+              <td>VendorAddress1</td>
+              <td>Mailing address line 1 of vendor</td>
+            </tr>
+            <tr>
+              <td>VendorAddress2</td>
+              <td>Mailing address line 2 of vendor</td>
+            </tr>
+            <tr>
+              <td>VendorCity</td>
+              <td>Mailing city of vendor</td>
+            </tr>
+            <tr>
+              <td>VendorState</td>
+              <td>Mailing state of vendor</td>
+            </tr>
+            <tr>
+              <td>VendorZip</td>
+              <td>Mailing zip code of vendor</td>
+            </tr>
+            <tr>
+              <td>RptType</td>
+              <td>Report type. A-1, Final or Quarterly</td>
+            </tr>
+            <tr>
+              <td>ElectionType</td>
+              <td><em>Typically blank</em></td>
+            </tr>
+            <tr>
+              <td>ElectionYear</td>
+              <td><em>Typically blank</em></td>
+            </tr>
+            <tr>
+              <td>RptPdBegDate</td>
+              <td>Report period begin date</td>
+            </tr>
+            <tr>
+              <td>RptPdEndDate</td>
+              <td>Report period end date</td>
+            </tr>
+            <tr>
+              <td>RptRcvdDate</td>
+              <td>Date report was received</td>
+            </tr>
+            <tr>
+              <td>CmteReferName</td>
+              <td>Used by the Illinois State Board of Elections internally to identify the committee</td>
+            </tr>
+            <tr>
+              <td>CmteName</td>
+              <td>Name of the committee the contribution was given to</td>
+            </tr>
+            <tr>
+              <td>StateCmte</td>
+              <td>True or False</td>
+            </tr>
+            <tr>
+              <td>StateID</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>LocalCmte</td>
+              <td>True or False</td>
+            </tr>
+            <tr>
+              <td>LocalID</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<table class='table table-bordered' id="receipts_list">
+  <thead>
+    <tr>
+      <th>File</th>
+      <th>Size</th>
+      <th>Last modified</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+<h3 id='expenditures'>
+  <i class='fa fa-users'></i>
+  <i class='fa fa-long-arrow-right'></i>
+  <i class='fa fa-dollar'></i>
+  Campaign expenditures
+</h3>
+<p><strong>Itemized expenditures by political committees.</strong> Any payment, distribution, purchase, loan, advance, deposit, gift of money or anything of value, or any transfer of funds between political committees, made to support or oppose a candidate or proposition. The definition also includes an electioneering communication.<br />Updated daily (though the data is released quarterly).</p>
+
+<div class="panel-group" id="expenditures_accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#expenditures_accordion" href="#expenditures_collapse">
+          <i class='fa fa-question-circle'></i>
+          Field definitions - Campaign expenditures
+        </a>
+      </h4>
+    </div>
+    <div id="expenditures_collapse" class="panel-collapse collapse">
+      <div class="panel-body">
+        <table class='table'>
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CommitteeID</td>
+              <td>ID of the committee the contribution was given to</td>
+            </tr>
+            <tr>
+              <td>LastOnlyName</td>
+              <td>Individual last name or organization name of expenditure recipient</td>
+            </tr>
+            <tr>
+              <td>FirstName</td>
+              <td>Individual first name of expenditure recipient</td>
+            </tr>
+            <tr>
+              <td>ExpendedDate</td>
+              <td>Date the expenditure was made</td>
+            </tr>
+            <tr>
+              <td>Amount</td>
+              <td>Expenditure amount</td>
+            </tr>
+            <tr>
+              <td>Address1</td>
+              <td>Mailing address line 1 of recipient</td>
+            </tr>
+            <tr>
+              <td>Address2</td>
+              <td>Mailing address line 2 of recipient</td>
+            </tr>
+            <tr>
+              <td>City</td>
+              <td>Mailing city of recipient</td>
+            </tr>
+            <tr>
+              <td>State</td>
+              <td>Mailing state of recipient</td>
+            </tr>
+            <tr>
+              <td>Zip</td>
+              <td>Mailing zip code of recipient</td>
+            </tr>
+            <tr>
+              <td>ExpType</td>
+              <td>Expenditure type. Expenditure, Transfer Out, 9B or Loan Made</td>
+            </tr>
+            <tr>
+              <td>Purpose</td>
+              <td>Purpose of expenditure</td>
+            </tr>
+            <tr>
+              <td>Beneficiary</td>
+              <td>The candidate or political committee deemed to have received the benefit from an expenditure. </td>
+            </tr>
+            <tr>
+              <td>CandidateName</td>
+              <td>Name of candidate affiliated with the committee</td>
+            </tr>
+            <tr>
+              <td>Office</td>
+              <td>Seeking office of candidate. <em>Typically blank</em></td>
+            </tr>
+            <tr>
+              <td>Supporting</td>
+              <td>True if the committee is supporting the candidate or ballot initiative</td>
+            </tr>
+            <tr>
+              <td>Opposing</td>
+              <td>True if the committee is opposing the candidate or ballot initiative</td>
+            </tr>
+            <tr>
+              <td>RptType</td>
+              <td>Report type. Quarterly or Final</td>
+            </tr>
+            <tr>
+              <td>ElectionType</td>
+              <td><em>Typically blank</em></td>
+            </tr>
+            <tr>
+              <td>ElectionYear</td>
+              <td><em>Typically blank</em></td>
+            </tr>
+            <tr>
+              <td>RptPdBegDate</td>
+              <td>Report period begin date</td>
+            </tr>
+            <tr>
+              <td>RptPdEndDate</td>
+              <td>Report period end date</td>
+            </tr>
+            <tr>
+              <td>CmteReferName</td>
+              <td>Used by the Illinois State Board of Elections internally to identify the committee</td>
+            </tr>
+            <tr>
+              <td>CmteName</td>
+              <td>Committee name</td>
+            </tr>
+            <tr>
+              <td>StateCmte</td>
+              <td>True or False</td>
+            </tr>
+            <tr>
+              <td>StateID</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>LocalCmte</td>
+              <td>True or False</td>
+            </tr>
+            <tr>
+              <td>LocalID</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>RptRcvdDate</td>
+              <td>Date the report was received</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<table class='table table-bordered' id="expenditures_list">
+  <thead>
+    <tr>
+      <th>File</th>
+      <th>Size</th>
+      <th>Last modified</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+<h3 id='reports'>
+  <i class='fa fa-files-o'></i>
+  Committee reports
+</h3>
+<p><strong>Periodic summaries of fiscal activity for committees</strong> Includes total amounts in receipts, expenditures and investment activity over a given reporting cycle, as well as a link to a detail report where possible. These files also include A-1 Reports of individual contributions over $1000<br />Updated daily.</p>
+
+<div class="panel-group" id="reports_accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#reports_accordion" href="#reports_collapse">
+          <i class='fa fa-question-circle'></i>
+          Field definitions - Committee Reports
+        </a>
+      </h4>
+    </div>
+    <div id="reports_collapse" class="panel-collapse collapse">
+      <div class="panel-body">
+        <table class='table'>
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>id</td>
+              <td>Unique ID for the report</td>
+            </tr>
+            <tr>
+              <td>committee_id</td>
+              <td>ID of the committee that submitted the report</td>
+            </tr>
+            <tr>
+              <td>period_from</td>
+              <td>Starting date of the reporting period</td>
+            </tr>
+            <tr>
+              <td>period_to</td>
+              <td>Ending date of the reporting period</td>
+            </tr>
+            <tr>
+              <td>date_filed</td>
+              <td>Date the report was filed</td>
+            </tr>
+            <tr>
+              <td>type</td>
+              <td>Type of report (Quarterly, Semiannual, or A-1) </td>
+            </tr>
+            <tr>
+              <td>funds_start</td>
+              <td>Dollar amount the committee had at the beginning of the reporting period</td>
+            </tr>
+            <tr>
+              <td>funds_end</td>
+              <td>Dollar amount the committee hasd at the end of the reporting period</td>
+            </tr>
+            <tr>
+              <td>receipts</td>
+              <td>Dollar amount received by the committee during the reporting period</td>
+            </tr>
+            <tr>
+              <td>expenditures</td>
+              <td>Dollar amount spent by the committee during the reporting period</td>
+            </tr>
+            <tr>
+              <td>invest_total</td>
+              <td>Total investments controlled by the committee at the end of the reporting period</td>
+            </tr>
+            <tr>
+              <td>detail_url</td>
+              <td>URL for the detail page of the report on the IL Board of Elections website</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<table class='table table-bordered' id="reports_list">
+  <thead>
+    <tr>
+      <th>File</th>
+      <th>Size</th>
+      <th>Last modified</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+<h3>Understanding the data</h3>
+<p>Interested in learning more about campaign finance disclosure in Illinois? Here are a few useful resources:</p>
+
+<ul>
+  <li><a href='http://www.elections.il.gov/downloads/campaigndisclosure/pdf/campdiscguide.pdf'>Official Guide to Campaign Disclosure</a> (PDF)</li>
+  <li><a href='http://www.elections.il.gov/Downloads/CampaignDisclosure/PDF/CampDiscAct.pdf'>Illinois Campaign Disclosure Act</a> (PDF)</li>
+  <li><a href='http://www.elections.il.gov/Downloads/CampaignDisclosure/PDF/Contribution%20Limits.pdf'>Illinois Campaign Financing Act - Contribution Limits</a> (PDF)</li>
+  <li><a href='http://www.elections.il.gov/CampaignDisclosure/GlossaryAE.aspx'>Campaign Disclosure Glossary A - E</a></li>
+  <li><a href='http://www.elections.il.gov/CampaignDisclosure/faq.aspx'>Frequently Asked Questions about Campaign Disclosure</a></li>
+</ul>
+<hr />
+
+<p class='pull-left'>Source: <a href='http://www.elections.state.il.us/CampaignDisclosure/ContributionsSearchByAllContributions.aspx'>Illinois State Board of Elections</a></p>
+
+<p class='pull-right'>Built by <a href='http://datamade.us'>DataMade</a> | Code on <a href='https://github.com/datamade/il-elections-bulk-download'><i class='fa fa-github'></i> GitHub</a></p>
+
+{% endblock %}
+
+{% block extra_scripts %}
+  <script src="/static/js/jquery.dataTables.min.js"></script>
+  <script src="/static/js/spin.min.js"></script>
+  <script src="/static/js/jquery.spin.js"></script>
+  <script src="/static/js/app.js"></script>
+
+  <script type="text/javascript">
+    function makeDataTable(el) {
+      $("#" + el).dataTable( {
+          "aaSorting": [ [0,'desc'] ],
+          "aoColumns": [
+              null,
+              { "sType": "data-value-num" },
+              { "sType": "data-value-string" }
+          ],
+          "bInfo": false,
+          "bFilter": false,
+          "bPaginate": false
+      });
+    }
+  </script>
+{% endblock %}
