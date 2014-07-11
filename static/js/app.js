@@ -14,12 +14,14 @@ function load_list(el){
             var html = append_resp(resp);
             $('#' + el + '_list').spin(false)
             $('#' + el + '_list tbody').append(html)
+
+            makeDataTable(el + '_list');
         }
     )
 }
 
 function get_list(list_type){
-    console.log('/list/' + list_type + '/')
+    //console.log('/list/' + list_type + '/')
     return $.getJSON('/list/' + list_type + '/')
 }
 function append_resp(data){
