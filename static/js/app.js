@@ -1,4 +1,7 @@
 (function(){
+
+    initQualityChart('quality_chart');
+
     load_list('candidates');
     load_list('committees');
     load_list('receipts');
@@ -46,5 +49,60 @@ function makeDataTable(el) {
       "bInfo": false,
       "bFilter": false,
       "bPaginate": false
+  });
+}
+
+function initQualityChart(el) {
+  $('#' + el).highcharts({
+      chart: {
+          type: 'bar'
+      },
+      title: {
+          text: null
+      },
+      xAxis: {
+        title: null,
+          labels: {
+            enabled: false
+          }
+      },
+      yAxis:{
+          title: null,
+          min: 1989,
+          max: 2015
+      },
+      plotOptions: {
+          series: {
+              stacking: 'true'
+          }
+      },
+      tooltip: {
+        borderColor: "#ccc",
+        formatter: function() {
+          return this.series.name;
+        }
+      },
+      series: [
+        {
+          name: '2000 on: Good',
+          data: [ 15 ],
+          color: "#43ac6a"
+        },
+        {
+          name: '1999: Incomplete',
+          data: [ 1 ],
+          color: "#f04124"
+        },
+        {
+          name: '1994 - 1999: Manually entered',
+          data: [ 5 ],
+          color: "#e99002"
+        }, 
+        {
+          name: '1989 - 1994: Incorrect',
+          data: [ 1994 ],
+          color: "#f04124"
+        }
+      ]
   });
 }

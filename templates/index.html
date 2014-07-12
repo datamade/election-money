@@ -42,6 +42,9 @@
   </a>
 </p>
 
+<h3>Data quality</h3>
+<div id="quality_chart" style="height: 150px; margin: 0 auto"></div>
+
 <h3 id='candidates'><i class='fa fa-check-square-o'></i> Candidates</h3>
 <p><strong>Political candidates registered in Illinois.</strong> Any person who seeks nomination for election, election to, or retention in public office, or any person who seeks election as ward or township committeeman in Cook County. <br />Updated once a week on Tuesdays.</p>
 <div class="panel-group" id="candidates_accordion">
@@ -792,5 +795,9 @@
   <script src="/static/js/jquery.dataTables.sorting.js"></script>
   <script src="/static/js/spin.min.js"></script>
   <script src="/static/js/jquery.spin.js"></script>
+  <script src="http://code.highcharts.com/highcharts.js"></script>
   <script src="/static/js/app.js"></script>
+
+  <div id="container" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
+
 {% endblock %}
