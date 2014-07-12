@@ -91,17 +91,17 @@ function initQualityChart(el) {
         {
           name: '1999: Incomplete',
           data: [ 1 ],
-          color: "#f04124"
+          color: "#d9edf7"
         },
         {
           name: '1994 - 1999: Manually entered',
           data: [ 5 ],
-          color: "#e99002"
+          color: "#43ac6a"
         }, 
         {
           name: '1989 - 1994: Incorrect',
           data: [ 1994 ],
-          color: "#f04124"
+          color: "#d9edf7"
         }
       ]
   });
