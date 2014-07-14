@@ -1,6 +1,6 @@
-# il-elections-bulk-download
+# election-money
 
-Illinois State Board of Elections - Bulk Downloads
+Bulk downloads of Illinois campaign finance data from the [Illinois State Board of Elections](http://www.elections.il.gov/) going back to 1994
 
 Powered by [influence-usa/campaign-finance_state_IL](https://github.com/influence-usa/campaign-finance_state_IL)
 
