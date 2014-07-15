@@ -19,6 +19,12 @@
 </div>
 
 <p class='text-center'>
+  <a class='btn btn-success btn-lg' href='#'>
+    <i class='fa fa-download'></i> Download all <small>(300mb zip)</small>  
+  </a>
+</p>
+
+<p class='text-center'>
   <a class='btn btn-default btn-sm' href='#candidates'><i class='fa fa-check-square-o'></i> Candidates</a>
   <a class='btn btn-default btn-sm' href='#committees'><i class='fa fa-users'></i> Political committees</a>
   <a class='btn btn-default btn-sm' href='#officers'><i class='fa fa-user'></i> Committee officers</a>
@@ -43,7 +49,7 @@
 </p>
 
 <h3>Data quality</h3>
-<p>Prior to July 1999, when electronic filing was introduced, much of the data provided by the Illinois State Board of Elections is incorrect or missing.</p>
+<p>We make available all raw candidate, committee and contribution data from the <a href='http://www.elections.il.gov/'>Illinois State Board of Elections</a>. However, prior to July 1999, when electronic filing was introduced, much of the data is incorrect or missing. <br />Keep this in mind when working with it.</p>
 <div id="quality_chart" style="height: 150px; margin: 0 auto"></div>
 
 <h3 id='candidates'><i class='fa fa-check-square-o'></i> Candidates</h3>
@@ -785,20 +791,15 @@
   </tbody>
 </table>
 
-<p class='pull-left'>Source: <a href='http://www.elections.state.il.us/CampaignDisclosure/ContributionsSearchByAllContributions.aspx'>Illinois State Board of Elections</a></p>
-
-<p class='pull-right'>Built by <a href='http://datamade.us'>DataMade</a> | Code on <a href='https://github.com/datamade/il-elections-bulk-download'><i class='fa fa-github'></i> GitHub</a></p>
-
 {% endblock %}
 
 {% block extra_scripts %}
+
   <script src="/static/js/jquery.dataTables.min.js"></script>
   <script src="/static/js/jquery.dataTables.sorting.js"></script>
   <script src="/static/js/spin.min.js"></script>
   <script src="/static/js/jquery.spin.js"></script>
   <script src="http://code.highcharts.com/highcharts.js"></script>
   <script src="/static/js/app.js"></script>
-
-  <div id="container" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
 
 {% endblock %}
