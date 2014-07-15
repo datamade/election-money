@@ -82,11 +82,12 @@ function initQualityChart(el) {
           return this.series.name;
         }
       },
+      legend: { reversed: true },
       series: [
         {
-          name: '2000 on: Good',
+          name: '2000 on: Electronic filings',
           data: [ 15 ],
-          color: "#43ac6a"
+          color: "#43ac6a",
         },
         {
           name: '1999: Incomplete',
@@ -99,7 +100,7 @@ function initQualityChart(el) {
           color: "#43ac6a"
         }, 
         {
-          name: '1989 - 1994: Incorrect',
+          name: '1989 - 1994: Bad entries',
           data: [ 1994 ],
           color: "#d9edf7"
         }
