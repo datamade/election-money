@@ -2,22 +2,39 @@
 
 {% block content %}
 <h1>About Election Money</h1>
-<p>Interested in money in <strong>Illinois</strong> politics? This site makes availablebulk downloads of Illinois campaign contributions and expenditures from the <a href='http://www.elections.il.gov'>Illinois State Board of Elections</a> going back to 1994.</p>
+<p>Interested in money in <strong>Illinois</strong> politics? This site makes available bulk downloads of Illinois campaign contributions and expenditures from the <a href='http://www.elections.il.gov'>Illinois State Board of Elections</a> going back to 1994.</p>
 
-<p>All money donated and spent on elections in Illinois is <a href='http://www.elections.il.gov/Downloads/CampaignDisclosure/PDF/CampDiscAct.pdf'>required by law</a> to be reported to the Illinois State Board of Elections. This campaign finance information is, in turn, is made publicly available on <a href='http://www.elections.il.gov'>elections.il.gov</a> via a search interface.</p>
+<p><strong>Who has to report campaign finance?</strong> Any political committee that exceeds $5,000 in either receipts or expenditures over the period of a year (this is the filing threshold). Once a committee exceeds the filing threshold, they are covered by the <a href='http://www.elections.il.gov/Downloads/CampaignDisclosure/PDF/CampDiscAct.pdf'>IL Campaign Disclosure Act</a> (PDF) and are required to report contributions and expenditures accordingly. This campaign finance information is, in turn, made publicly available on <a href='http://www.elections.il.gov'>elections.il.gov</a> via a search interface.</p>
 
 <p>We built <strong>Election Money</strong> to give journalists, activists and citizens better access to and documentation for this historical data.</p>
 
-
-<h3 id='who-reports'>Who has to report campaign finance?</h3>
-<p>A political committee that exceeds $5,000 in either receipts or expenditures over the period of a year (this is the filing threshold). Once a committee exceeds the filing threshold, they are covered by the <a href='http://www.elections.il.gov/Downloads/CampaignDisclosure/PDF/CampDiscAct.pdf'>IL Campaign Disclosure Act</a> (PDF) and are required to report contributions and expenditures accordingly.</p>
-
 <h3 id='what-gets-reported'>What gets reported?</h3>
-<ul>
-  <li><strong>up to $150:</strong> Contributions and expenditures go into summary totals in the Report of Campaign Contributions and Expenditures (<a href='/about#d-2'>Form D-2</a>) but do not need to be itemized.</li>
-  <li><strong>$150 to $1000:</strong> Contributions and expenditures must be itemized (<a href='/about#schedule-a'>Schedule A</a> for contributions &amp; <a href='/about#schedule-b'>Schedule B</a> for expenditures) as well as included in summary totals in Form D-2.</li>
-  <li><strong>$1000 or more:</strong> Contributions need to be reported on <a href='/about#schedule-a-1'>Schedule A-1</a>, expenditures on <a href='/about#schedule-b-1'>Schedule B-1</a>, as well as included in summary totals in Form D-2</li>
-</ul>
+<table id="form-explainer" class="table">
+  <thead>
+    <tr>
+      <th width='18%'>Amount</th>
+      <th>Level of disclosure</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>up to $150</td>
+      <td>Summary totals</td>
+      <td>Contributions and expenditures go into summary totals in the Report of Campaign Contributions and Expenditures (<a href='/about#d-2'>Form D-2</a>) but do not need to be itemized.</td>
+    </tr>
+    <tr>
+      <td>$150 to $1,000</td>
+      <td>Itemized disclosure</td>
+      <td>Contributions and expenditures must be itemized (<a href='/about#schedule-a'>Schedule A</a> for contributions &amp; <a href='/about#schedule-b'>Schedule B</a> for expenditures) as well as included in summary totals in Form D-2.</td>
+    </tr>
+    <tr>
+      <td>$1,000 or more</td>
+      <td>Detailed disclosure</td>
+      <td>Contributions need to be reported on <a href='/about#schedule-a-1'>Schedule A-1</a>, expenditures on <a href='/about#schedule-b-1'>Schedule B-1</a>, as well as included in summary totals in Form D-2.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id='data-quality'>Data quality</h3>
 <p>We make available all raw candidate, committee and contribution data from the <a href='http://www.elections.il.gov/'>Illinois State Board of Elections</a>. However, prior to July 1999, when electronic filing was introduced, much of the data is incorrect or missing. <br />Keep this in mind when working with it.</p>
@@ -28,59 +45,82 @@
 <table id="form-explainer" class="table">
   <thead>
     <tr>
-      <th>Campaign Disclosure Form</th>
+      <th width='20%'>Campaign Disclosure Form</th>
+      <th>Disclosure type</th>
       <th>Description</th>
     </tr>
   </thead>
   <tbody>
     <tr id="d-1">
-      <td>D-1 Form (i.e. Statement of Organization)</td>
+      <td>D-1 Form (Statement of Organization)</td>
+      <td>
+        <span class='label label-info'>Committees</span>
+      </td>
       <td>A form providing <strong>basic committee information</strong>, registering a political committee with the Illinois State Board of Elections. This form is filed after a political committee has exceeded $5000 in either receipts or expenditures over a year (the filing threshold), at which point they are covered by the Illinois Campaign Disclosure law and thus are required to report contributions and expenditures accordingly.</td>
     </tr>
     <tr id="d-1-a">
       <td>D-1-A Form</td>
+      <td>
+        <span class='label label-info'>Committees</span>
+      </td>
       <td>A <strong>supplement to the D-1 Form</strong>, only required if the political committee indicated is a legislative caucus committee established by 5+ members in the same Senate caucus or 10+ members in the same House of Representatives caucus.</td>
-      
     </tr>
     <tr id="d-2">
-      <td>D-2 Form (i.e. Report of Campaign Contributions and Expenditures)</td>
+      <td>D-2 Form (Report of Campaign Contributions and Expenditures)</td>
+      <td>
+        <span class='label label-danger'>Expenditures</span><br /><br />
+        <span class='label label-success'>Contributions</span>
+      </td>
       <td>A form for filing a quarterly report, a final report, or an amendment to a report. These reports include <strong>summary totals</strong> of a political committee's contributions, expenditures, debts, fund balances, and investments over a given reporting period.</td>
-      
     </tr>
     <tr id="schedule-a">
       <td>Schedule A</td>
+      <td>
+        <span class='label label-success'>Contributions</span>
+      </td>
       <td>A form for reporting all <strong>itemized contributions</strong> to a political committee over $150. These itemized contributions are reported quarterly.</td>
-      
     </tr>
     <tr id="schedule-a-1">
       <td>Schedule A-1</td>
+      <td>
+        <span class='label label-success'>Contributions</span>
+      </td>
       <td>A form for reporting a <strong>contribution of $1000 or more</strong> from a single source.</td>
-      
     </tr>
     <tr id="schedule-b">
       <td>Schedule B</td>
+      <td>
+        <span class='label label-danger'>Expenditures</span>
+      </td>
       <td>A form for reporting all <strong>itemized expenditures</strong> from a political committee over $150. These itemized expenditures are reported quarterly.</td>
-      
     </tr>
     <tr id="schedule-b-1">
       <td>Schedule B-1</td>
+      <td>
+        <span class='label label-danger'>Expenditures</span>
+      </td>
       <td>A form for reporting an independent? <strong>expenditure of $1000 or more</strong>.</td>
-      
     </tr>
     <tr id="schedule-b-9">
       <td>Schedule B-9</td>
+      <td>
+        <span class='label label-danger'>Expenditures</span>
+      </td>
       <td>A form for reporting all <strong>itemized independent expenditures</strong> from a political committee over $150</td>
-      
     </tr>
     <tr id="schedule-c">
       <td>Schedule C</td>
+      <td>
+        <span class='label label-success'>Contributions</span>
+      </td>
       <td>A form for reporting all <strong>itemized outstanding debts and obligations</strong> of a political committee over $150</td>
-      
     </tr>
     <tr id="schedule-i">
       <td>Schedule I</td>
+      <td>
+        <span class='label label-success'>Contributions</span>
+      </td>
       <td>A form for reporting all <strong>itemized in-kind contributions</strong> to a political committee over $150.</td>
-      
     </tr>
   </tbody>
 

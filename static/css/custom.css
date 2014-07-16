@@ -3,6 +3,10 @@ body {
   padding-top: 20px;
 }
 
+.table {
+  font-size: 16px;
+}
+
 h3 {
   padding-top: 50px;
 }
