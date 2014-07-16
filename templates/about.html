@@ -4,6 +4,25 @@
 <h1>About Election Money</h1>
 <p>Interested in money in <strong>Illinois</strong> politics? This site makes availablebulk downloads of Illinois campaign contributions and expenditures from the <a href='http://www.elections.il.gov'>Illinois State Board of Elections</a> going back to 1994.</p>
 
+<p>All money donated and spent on elections in Illinois is <a href='http://www.elections.il.gov/Downloads/CampaignDisclosure/PDF/CampDiscAct.pdf'>required by law</a> to be reported to the Illinois State Board of Elections. This campaign finance information is, in turn, is made publicly available on <a href='http://www.elections.il.gov'>elections.il.gov</a> via a search interface.</p>
+
+<p>We built <strong>Election Money</strong> to give journalists, activists and citizens better access to and documentation for this historical data.</p>
+
+
+<h3 id='who-reports'>Who has to report campaign finance?</h3>
+<p>A political committee that exceeds $5,000 in either receipts or expenditures over the period of a year (this is the filing threshold). Once a committee exceeds the filing threshold, they are covered by the <a href='http://www.elections.il.gov/Downloads/CampaignDisclosure/PDF/CampDiscAct.pdf'>IL Campaign Disclosure Act</a> (PDF) and are required to report contributions and expenditures accordingly.</p>
+
+<h3 id='what-gets-reported'>What gets reported?</h3>
+<ul>
+  <li><strong>up to $150:</strong> Contributions and expenditures go into summary totals in the Report of Campaign Contributions and Expenditures (<a href='/about#d-2'>Form D-2</a>) but do not need to be itemized.</li>
+  <li><strong>$150 to $1000:</strong> Contributions and expenditures must be itemized (<a href='/about#schedule-a'>Schedule A</a> for contributions &amp; <a href='/about#schedule-b'>Schedule B</a> for expenditures) as well as included in summary totals in Form D-2.</li>
+  <li><strong>$1000 or more:</strong> Contributions need to be reported on <a href='/about#schedule-a-1'>Schedule A-1</a>, expenditures on <a href='/about#schedule-b-1'>Schedule B-1</a>, as well as included in summary totals in Form D-2</li>
+</ul>
+
+<h3 id='data-quality'>Data quality</h3>
+<p>We make available all raw candidate, committee and contribution data from the <a href='http://www.elections.il.gov/'>Illinois State Board of Elections</a>. However, prior to July 1999, when electronic filing was introduced, much of the data is incorrect or missing. <br />Keep this in mind when working with it.</p>
+<div id="quality_chart" style="height: 150px; margin: 0 auto"></div>
+
 <h3>Campaign Disclosure in Illinois</h3>
 <p>The following are campaign disclosure forms required under the Illinois Campaign Disclosure Act:</p>
 <table id="form-explainer" class="table">
@@ -107,5 +126,12 @@
 <p>Found a bug? Report it on our <a href='https://github.com/datamade/election-money/issues'>issue tracker</a>.</p>
 
 <p>Have a suggestion? <a href='http://datamade.us/contact-us/'>Contact DataMade</a>.</p>
+
+{% endblock %}
+
+{% block extra_scripts %}
+
+  <script src="http://code.highcharts.com/highcharts.js"></script>
+  <script src="/static/js/quality-chart.js"></script>
 
 {% endblock %}
