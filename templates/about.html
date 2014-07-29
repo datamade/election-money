@@ -178,7 +178,6 @@
 
 </table>
 
-
 <h2>Understanding the data</h2>
 <p>Interested in learning more about campaign finance disclosure in Illinois? Here are a few useful resources:</p>
 
@@ -202,6 +201,37 @@
   <li><a href='http://www.uis.edu/politicalscience/faculty/redfield/'>Kent Redfield</a>, ICPR</li>
   <li>David Melton, ICPR</li>
 </ul>
+
+<h2 id='api'>API (for programmers)</h2>
+<p>Lists of and links to each individual file are also available via an API for those of you who plan on using this data to build your own app.</p>
+
+<p>API endpoints available:</p>
+
+<ul>
+  <li><a href='http://electionmoney.org/list/candidates/'>http://electionmoney.org/list/candidates/</a></li>
+  <li><a href='http://electionmoney.org/list/committees/'>http://electionmoney.org/list/committees/</a></li>
+  <li><a href='http://electionmoney.org/list/officers/'>http://electionmoney.org/list/officers/</a></li>
+  <li><a href='http://electionmoney.org/list/receipts/'>http://electionmoney.org/list/receipts/</a></li>
+  <li><a href='http://electionmoney.org/list/expenditures/'>http://electionmoney.org/list/expenditures/</a></li>
+  <li><a href='http://electionmoney.org/list/reports/'>http://electionmoney.org/list/reports/</a></li>
+</ul>
+
+<p>For each endpoint, a list of files is returned in JSON format:</p>
+
+<pre>
+# example response from http://electionmoney.org/list/candidates/
+[
+  {
+    "modified_date": "Jul 25, 2014 01:27 PM",
+    "name": "Candidates.csv",
+    "url": "https://s3.amazonaws.com/il-elections/Candidates.csv",
+    "bucket": "il-elections",
+    "last_modified": "2014-07-25T13:27:15.000Z",
+    "size_bytes": 2757110,
+    "size": "2.6 MB"
+  }
+]
+</pre>
 
 <h2>Code</h2>
 

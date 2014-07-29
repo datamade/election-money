@@ -40,6 +40,7 @@ def get_list_type(list_type):
                 'size': format_file(key.size),
                 'size_bytes': key.size,
                 'name': key.name.encode('utf-8'),
+                'url': 'https://s3.amazonaws.com/' + key.bucket.name + '/' + key.name.encode('utf-8'),
                 'modified_date': format_datetime(key.last_modified),
                 'last_modified': key.last_modified,
             }

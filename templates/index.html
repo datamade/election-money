@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
 
-{% from "partials/file_table.html" import file_table %}
-
 {% block content %}
 <div class='jumbotron'>
   <h1>Election Money</h1>
@@ -48,7 +46,7 @@
 
 <p>Read more about <a href='/about'>reporting requirements</a> and <a href='/about#data-quality'>data quality</a>.</p>
 
-<h3 id='candidates'><i class='fa fa-check-square-o'></i> Candidates</h3>
+<h3 id='candidates'><i class='fa fa-check-square-o'></i> Registered candidates</h3>
 <p><strong>Political candidates registered in Illinois.</strong> Includes any person who seeks nomination for election, election to, or retention in public office, or any person who seeks election as ward or township committeeman in Cook County. <em>Updated once a week on Tuesdays.</em></p>
 <div class="panel-group" id="candidates_accordion">
   <div class="panel panel-default">
@@ -184,8 +182,9 @@
   <tbody>
   </tbody>
 </table>
+<p ><i class='fa fa-code'></i> <a href='/list/candidates'>File list as JSON</a></p>
 
-<h3 id='committees'><i class='fa fa-users'></i> Political committees</h3>
+<h3 id='committees'><i class='fa fa-users'></i> Registered political committees</h3>
 <p><strong>Political committees registered in Illinois.</strong> Includes candidate political committees, political party committees, political action committees, independent-expenditure-only PACs, and ballot initiative committees. <em>Updated once a week on Tuesdays.</em></p>
 <div class="panel-group" id="committees_accordion">
   <div class="panel panel-default">
@@ -285,6 +284,7 @@
   <tbody>
   </tbody>
 </table>
+<p ><i class='fa fa-code'></i> <a href='/list/committees'>File list as JSON</a></p>
 
 <h3 id='officers'><i class='fa fa-user'></i> Committee officers</h3>
 <p><strong>Officers for each committee.</strong> Each political committee must have both a chairman and a treasurer. One person may hold both positions. A candidate may serve as his own chairman and treasurer. No financial transactions may take place while there is a vacancy in either office. <em>Updated once a week on Tuesdays.</em></p>
@@ -347,12 +347,14 @@
   <tbody>
   </tbody>
 </table>
+<p ><i class='fa fa-code'></i> <a href='/list/officers'>File list as JSON</a></p>
+
 
 <h3 id='receipts'>
   <i class='fa fa-dollar'></i>
   <i class='fa fa-long-arrow-right'></i>
   <i class='fa fa-users'></i>
-  Campaign contributions
+  Itemized campaign contributions
 </h3>
 <p><strong>Itemized contributions to political committees in Illinois.</strong> Includes any gift, subscription, donation, dues, loan, advance, deposit of money, anything of value, purchase of fundraising ticket, or transfer of funds knowingly received to support or oppose a candidate or proposition. <em>Updated daily.</em></p>
 
@@ -530,12 +532,14 @@
   <tbody>
   </tbody>
 </table>
+<p ><i class='fa fa-code'></i> <a href='/list/receipts'>File list as JSON</a></p>
+
 
 <h3 id='expenditures'>
   <i class='fa fa-users'></i>
   <i class='fa fa-long-arrow-right'></i>
   <i class='fa fa-dollar'></i>
-  Campaign expenditures
+  Itemized campaign expenditures
 </h3>
 <p><strong>Itemized expenditures by political committees in Illinois.</strong> Any payment, distribution, purchase, loan, advance, deposit, gift of money or anything of value, or any transfer of funds between political committees, made to support or oppose a candidate or proposition. The definition also includes an electioneering communication. <em>Updated daily (though the data is released quarterly).</em></p>
 
@@ -693,10 +697,11 @@
   <tbody>
   </tbody>
 </table>
+<p ><i class='fa fa-code'></i> <a href='/list/expenditures'>File list as JSON</a></p>
 
 <h3 id='reports'>
   <i class='fa fa-files-o'></i>
-  Committee reports
+  Committee fiscal report summaries
 </h3>
 <p><strong>Periodic summaries of fiscal activity for committees.</strong> Includes total amounts in receipts, expenditures and investment activity over a given reporting cycle, as well as a link to a detailed report where possible. These files also include <a href='/about#schedule-a-1'>A-1 Reports</a> of individual contributions over $1,000. <em>Updated once a week on Tuesdays.</em></p>
 
@@ -786,6 +791,7 @@
   <tbody>
   </tbody>
 </table>
+<p ><i class='fa fa-code'></i> <a href='/list/reports'>File list as JSON</a></p>
 
 {% endblock %}
 
