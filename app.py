@@ -21,6 +21,11 @@ app.config['PROPAGATE_EXCEPTIONS'] = True
 def index():
   return render_app_template('index.html')
 
+@app.route('/documentation')
+# @cache.cached(timeout=60*10) # cache for 10 min
+def documentation():
+    return render_app_template('documentation.html')
+
 @app.route('/about')
 # @cache.cached(timeout=60*10) # cache for 10 min
 def about():

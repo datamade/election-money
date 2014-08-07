@@ -31,7 +31,8 @@
 
           <ul class="nav nav-pills pull-right">
             <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
+            <li class="{% if request.path == '/documentation' %}active{% endif %}"><a href="/documentation">Understanding the data</a></li>
+            <li class="{% if request.path == '/about' %}active{% endif %}"><a href="/about">About this project</a></li>
           </ul>
           <div class='clearfix'></div>
 
@@ -39,7 +40,7 @@
           {% endblock %}
 
           <hr />
-          <p class='pull-right'>Built by <a href='http://datamade.us'>DataMade</a> and <a href='http://www.ilcampaign.org/' title='Illinois Campaign for Political Reform'>ICPR</a> | Code on <a href='https://github.com/datamade/il-elections-bulk-download'><i class='fa fa-github'></i> GitHub</a></p>
+          <p class='pull-right'>Built by <a href='http://datamade.us'>DataMade</a> and <a href='http://www.ilcampaign.org/' title='Illinois Campaign for Political Reform'>Illinois Campaign for Political Reform</a> | Code on <a href='https://github.com/datamade/il-elections-bulk-download'><i class='fa fa-github'></i> GitHub</a></p>
         </div>
       </div>
     </div>
