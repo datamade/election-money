@@ -14,3 +14,7 @@ h3 {
 .jumbotron {
   text-align: center;
 }
+
+.alert {
+    font-size: 18px;
+}
